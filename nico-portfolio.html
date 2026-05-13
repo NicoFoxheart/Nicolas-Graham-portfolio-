@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicolas Graham - Developer, Musician, Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+:root {
+  --midnight: #0a0e27;
+  --deep-blue: #1a1f3a;
+  --sunset-orange: #ff6b35;
+  --warm-gold: #f7931e;
+  --soft-purple: #9b59b6;
+  --sky-blue: #3498db;
+  --text-light: #e8e8e8;
+  --text-dim: #a8a8b8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  background: var(--midnight);
+  color: var(--text-light);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ANIMATED GRADIENT BACKGROUND */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, 
+    var(--midnight) 0%, 
+    var(--deep-blue) 50%, 
+    #2c1f3d 100%);
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.gradient-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, 
+    rgba(255, 107, 53, 0.1) 0%, 
+    transparent 50%),
+    radial-gradient(circle at 70% 80%, 
+    rgba(155, 89, 182, 0.08) 0%, 
+    transparent 50%);
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(50px, -50px) rotate(2deg); }
+  66% { transform: translate(-30px, 30px) rotate(-2deg); }
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 0;
+  background: rgba(10, 14, 39, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+nav.scrolled {
+  padding: 15px 0;
+  background: rgba(10, 14, 39, 0.95);
+}
+
+nav .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--sunset-orange), var(--warm-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+}
+
+nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--sunset-orange);
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--text-light);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sunset-orange);
+  margin-bottom: 20px;
+  font-weight: 500;
+  animation: fadeIn 1s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  background: linear-gradient(135deg, 
+    var(--text-light) 0%, 
+    var(--sunset-orange) 50%, 
+    var(--warm-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.hero-description {
+  font-size: 20px;
+  color: var(--text-dim);
+  margin-bottom: 50px;
+  line-height: 1.8;
+  animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.btn {
+  padding: 15px 35px;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--sunset-orange), var(--warm-gold));
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(255, 107, 53, 0.5);
+}
+
+.btn-secondary {
+  border: 2px solid var(--sunset-orange);
+  color: var(--sunset-orange);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 107, 53, 0.1);
+  transform: translateY(-3px);
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+.scroll-indicator::before {
+  content: '↓';
+  font-size: 24px;
+  color: var(--sunset-orange);
+}
+
+/* SECTION STYLES */
+section {
+  padding: 120px 40px;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--text-light), var(--sunset-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 18px;
+  margin-bottom: 80px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ABOUT SECTION */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-text {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s ease;
+}
+
+.about-text.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.about-text p {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+.about-text strong {
+  color: var(--sunset-orange);
+  font-weight: 600;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s ease 0.2s;
+}
+
+.skills-grid.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.skill-item {
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+  background: rgba(255, 107, 53, 0.1);
+  border-color: var(--sunset-orange);
+  transform: translateY(-3px);
+}
+
+/* PROJECTS SECTION */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--sunset-orange);
+  box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+}
+
+.project-image {
+  height: 200px;
+  background: linear-gradient(135deg, var(--deep-blue), var(--midnight));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.project-card:hover .project-image::before {
+  left: 100%;
+}
+
+.project-content {
+  padding: 30px;
+}
+
+.project-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--text-light);
+}
+
+.project-content p {
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.project-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.tag {
+  padding: 6px 14px;
+  background: rgba(255, 107, 53, 0.2);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--sunset-orange);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+}
+
+.project-link {
+  padding: 10px 20px;
+  background: rgba(255, 107, 53, 0.1);
+  color: var(--sunset-orange);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: var(--sunset-orange);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* MUSIC SECTION */
+.music-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.music-player {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.8s ease;
+}
+
+.music-player.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.audio-player {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  padding: 30px;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  transition: all 0.3s ease;
+}
+
+.audio-player:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--sunset-orange);
+}
+
+.track-art {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+audio {
+  filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
+  border-radius: 10px;
+}
+
+audio::-webkit-media-controls-panel {
+  background: rgba(255, 107, 53, 0.1);
+}
+
+.track-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: var(--text-light);
+}
+
+.track-info p {
+  color: var(--text-dim);
+  font-size: 16px;
+}
+
+.music-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* PHOTOGRAPHY SECTION */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.photo-item {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--deep-blue), var(--midnight));
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.6s ease;
+}
+
+.photo-item.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.photo-item:hover {
+  transform: scale(1.05);
+  border-color: var(--sunset-orange);
+  box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3);
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 53, 0.1), 
+    rgba(155, 89, 182, 0.1));
+}
+
+/* CONTACT SECTION */
+.contact-content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-text {
+  font-size: 20px;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.social-links {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.social-link {
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-link:hover {
+  background: rgba(255, 107, 53, 0.1);
+  border-color: var(--sunset-orange);
+  color: var(--sunset-orange);
+  transform: translateY(-3px);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  background: rgba(10, 14, 39, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer p {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 48px;
+  }
+  
+  .hero-description {
+    font-size: 18px;
+  }
+  
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  nav ul {
+    gap: 20px;
+    font-size: 14px;
+  }
+  
+  .section-title {
+    font-size: 36px;
+  }
+  
+  section {
+    padding: 80px 20px;
+  }
+}
+
+/* SCROLL ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="gradient-bg"></div>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="logo">NG</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#photography">Photography</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-subtitle">Developer • Musician • Creator</div>
+    <h1>Nicolas Graham</h1>
+    <p class="hero-description">
+      Building applications that help people, creating ambient music for peaceful moments, and capturing beauty through photography. Recent USF graduate seeking to make an impact through technology.
+    </p>
+    <div class="cta-buttons">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"></div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">Developer. Musician. Photographer. Problem Solver.</p>
+    
+    <div class="about-content">
+      <div class="about-text fade-in">
+        <p>
+          Hi, I'm <strong>Nicolas Graham</strong> — a recent graduate from the University of South Florida with a <strong>BS in Information Architecture</strong>. I'm passionate about building technology that makes a difference in people's lives.
+        </p>
+        <p>
+          From mental health applications to IT management systems, I create solutions that are both functional and meaningful. When I'm not coding, you'll find me composing ambient music or capturing peaceful moments through photography.
+        </p>
+        <p>
+          Currently based in <strong>Tampa, FL</strong>, I'm seeking entry-level opportunities in IT and web development where I can contribute my skills and continue growing as a developer.
+        </p>
+      </div>
+      
+      <div class="skills-grid fade-in">
+        <div class="skill-item">Python • JavaScript</div>
+        <div class="skill-item">HTML • CSS • React</div>
+        <div class="skill-item">Information Architecture</div>
+        <div class="skill-item">UI/UX Design</div>
+        <div class="skill-item">Web Development</div>
+        <div class="skill-item">System Design</div>
+        <div class="skill-item">Problem Solving</div>
+        <div class="skill-item">Music Production</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-subtitle">Building solutions that matter</p>
+    
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-image">🌟</div>
+        <div class="project-content">
+          <h3>Haven</h3>
+          <p>A mental health support application providing calming breathing exercises and peaceful resources for those in need.</p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Mental Health</span>
+          </div>
+          <div class="project-links">
+            <a href="https://nico-breathing.netlify.app" target="_blank" class="project-link">Live Demo</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card fade-in" style="animation-delay: 0.2s">
+        <div class="project-image">🎫</div>
+        <div class="project-content">
+          <h3>HelpDesk</h3>
+          <p>Professional IT ticket management system with priority handling, status tracking, and comprehensive reporting.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">IT Support</span>
+            <span class="tag">Management</span>
+          </div>
+          <div class="project-links">
+            <a href="https://nico-helpdesk.netlify.app" target="_blank" class="project-link">Live Demo</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card fade-in" style="animation-delay: 0.4s">
+        <div class="project-image">💻</div>
+        <div class="project-content">
+          <h3>IT Command Center</h3>
+          <p>Real-time operations dashboard featuring system monitoring, server status tracking, and security alerts.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Real-time</span>
+            <span class="tag">Analytics</span>
+          </div>
+          <div class="project-links">
+            <a href="https://nicofoxheart.github.io/it-command-center/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
+            <a href="https://github.com/NicoFoxheart" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="music">
+  <div class="container">
+    <h2 class="section-title">Music</h2>
+    <p class="section-subtitle">Ambient soundscapes for peaceful moments</p>
+    
+    <div class="music-content">
+      <div class="music-player fade-in">
+        <div class="audio-player">
+          <div class="track-art">🎵</div>
+          <div class="track-info">
+            <h3>Sleepy Rain</h3>
+            <p>Ambient music for relaxation, study, and sleep</p>
+          </div>
+          <audio controls style="width: 100%; margin-top: 20px;">
+            <source src="sleepy-rain.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        
+        <div class="audio-player" style="margin-top: 30px;">
+          <div class="track-art">🌙</div>
+          <div class="track-info">
+            <h3>I Am With You Always</h3>
+            <p>Peaceful ambient soundscape</p>
+          </div>
+          <audio controls style="width: 100%; margin-top: 20px;">
+            <source src="i-am-with-you-always.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        
+        <div class="audio-player" style="margin-top: 30px;">
+          <div class="track-art">💫</div>
+          <div class="track-info">
+            <h3>I'll Never Leave You</h3>
+            <p>Comforting ambient composition</p>
+          </div>
+          <audio controls style="width: 100%; margin-top: 20px;">
+            <source src="ill-never-leave-you.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+      
+      <div class="music-links fade-in">
+        <p style="color: var(--text-dim); margin-top: 20px;">
+          More tracks coming soon. Follow me on social media for updates! 🎵
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="photography">
+  <div class="container">
+    <h2 class="section-title">Photography</h2>
+    <p class="section-subtitle">Capturing peaceful moments and ambient aesthetics</p>
+    
+    <div class="photo-grid">
+      <div class="photo-item fade-in">
+        <div class="photo-placeholder">🌅</div>
+      </div>
+      <div class="photo-item fade-in" style="animation-delay: 0.1s">
+        <div class="photo-placeholder">🌊</div>
+      </div>
+      <div class="photo-item fade-in" style="animation-delay: 0.2s">
+        <div class="photo-placeholder">🌙</div>
+      </div>
+      <div class="photo-item fade-in" style="animation-delay: 0.3s">
+        <div class="photo-placeholder">🌸</div>
+      </div>
+      <div class="photo-item fade-in" style="animation-delay: 0.4s">
+        <div class="photo-placeholder">✨</div>
+      </div>
+      <div class="photo-item fade-in" style="animation-delay: 0.5s">
+        <div class="photo-placeholder">🦊</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="contact-content">
+      <p class="contact-text">
+        I'm currently seeking entry-level opportunities in IT and web development in the Tampa area. Let's build something meaningful together.
+      </p>
+      
+      <div class="social-links fade-in">
+        <a href="https://github.com/NicoFoxheart" target="_blank" class="social-link">
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nicolas-graham-2b61b8264" target="_blank" class="social-link">
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank" class="social-link">
+          <span>YouTube</span>
+        </a>
+      </div>
+      
+      <div class="cta-buttons fade-in">
+        <a href="mailto:ngraham91@outlook.com" class="btn btn-primary">Send Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Nicolas Graham. Built with passion in Tampa, FL. 🦊</p>
+</footer>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Scroll animation observer
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observe all elements with fade-in class
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.project-card').forEach(el => observer.observe(el));
+document.querySelectorAll('.photo-item').forEach(el => observer.observe(el));
+document.querySelectorAll('.music-player').forEach(el => observer.observe(el));
+document.querySelectorAll('.about-text').forEach(el => observer.observe(el));
+document.querySelectorAll('.skills-grid').forEach(el => observer.observe(el));
+
+// Smooth scroll for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
