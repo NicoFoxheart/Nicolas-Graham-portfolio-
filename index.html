@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nicolas Graham - Developer, Musician, Creator</title>
-<meta name="description" content="Nicolas Graham - Panamanian-American developer building technology with heart. USF graduate seeking IT opportunities in Tampa, FL">
+<meta name="description" content="Nicolas Graham - Panamanian-American USF graduate building technology with heart. Seeking IT opportunities in Tampa, FL">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * { 
@@ -14,13 +14,13 @@
 }
 
 :root {
-  /* Panamanian + Tampa Cultural Palette */
+  /* Panama + USF + Tampa Cultural Fusion */
   --panama-red: #DA121A;
+  --usf-green: #006747;
+  --usf-gold: #CFC493;
   --ocean-blue: #0033A0;
-  --sunset-gold: #FFD700;
   --tropical-coral: #FF6B6B;
-  --rainforest-green: #2D5016;
-  --warm-sand: #F5DEB3;
+  --sunset-gold: #FFD700;
   --deep-night: #0a0e27;
   --soft-cream: #FFF8E7;
   --text-light: #F5F5F5;
@@ -39,62 +39,189 @@ body {
   line-height: 1.6;
 }
 
-/* CULTURAL GRADIENT BACKGROUND */
-.gradient-bg {
+/* ============================================
+   PREMIUM ANIMATED BACKGROUND - CULTURAL FUSION
+   ============================================ */
+
+.animated-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, 
-    #0a0e27 0%,
-    #1a1f3a 25%,
-    #2c1f3d 50%,
-    #1a2f3a 75%,
-    #0a0e27 100%);
-  animation: culturalShift 20s ease infinite;
+  overflow: hidden;
 }
 
-@keyframes culturalShift {
+/* Base gradient layer */
+.bg-layer-base {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    #0a0e27 0%,
+    #0d1a1f 25%,
+    #1a1420 50%,
+    #0f1e1a 75%,
+    #0a0e27 100%);
+  animation: baseShift 30s ease-in-out infinite;
+}
+
+@keyframes baseShift {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.85; }
 }
 
-.gradient-bg::before {
-  content: '';
+/* Floating orbs - Panama, USF, Tampa colors */
+.orb {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(218, 18, 26, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(0, 51, 160, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 70% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 35%);
-  animation: tropicalFloat 25s ease-in-out infinite;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: float 20s ease-in-out infinite;
 }
 
-@keyframes tropicalFloat {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(60px, -40px) rotate(3deg); }
-  66% { transform: translate(-40px, 40px) rotate(-3deg); }
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--panama-red), transparent);
+  top: -10%;
+  left: -10%;
+  animation-delay: 0s;
+  animation-duration: 25s;
 }
 
-/* Subtle Mola-Inspired Pattern Overlay */
-.gradient-bg::after {
-  content: '';
+.orb-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--usf-green), transparent);
+  top: 20%;
+  right: -15%;
+  animation-delay: 3s;
+  animation-duration: 30s;
+}
+
+.orb-3 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, var(--usf-gold), transparent);
+  bottom: -10%;
+  left: 20%;
+  animation-delay: 6s;
+  animation-duration: 28s;
+}
+
+.orb-4 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, var(--ocean-blue), transparent);
+  bottom: 20%;
+  right: 10%;
+  animation-delay: 9s;
+  animation-duration: 32s;
+}
+
+.orb-5 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--tropical-coral), transparent);
+  top: 50%;
+  left: 40%;
+  animation-delay: 12s;
+  animation-duration: 26s;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1);
+  }
+  25% { 
+    transform: translate(50px, -60px) scale(1.1);
+  }
+  50% { 
+    transform: translate(-30px, 40px) scale(0.95);
+  }
+  75% { 
+    transform: translate(40px, 30px) scale(1.05);
+  }
+}
+
+/* Particle system */
+.particles {
   position: absolute;
-  top: 0;
-  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--usf-gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 8s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 25%; top: 60%; animation-delay: 1.5s; }
+.particle:nth-child(3) { left: 40%; top: 30%; animation-delay: 3s; background: var(--panama-red); }
+.particle:nth-child(4) { left: 60%; top: 70%; animation-delay: 4.5s; background: var(--usf-green); }
+.particle:nth-child(5) { left: 75%; top: 40%; animation-delay: 6s; }
+.particle:nth-child(6) { left: 85%; top: 15%; animation-delay: 7.5s; background: var(--tropical-coral); }
+.particle:nth-child(7) { left: 15%; top: 80%; animation-delay: 2s; }
+.particle:nth-child(8) { left: 50%; top: 10%; animation-delay: 5s; background: var(--ocean-blue); }
+.particle:nth-child(9) { left: 70%; top: 55%; animation-delay: 3.5s; }
+.particle:nth-child(10) { left: 30%; top: 85%; animation-delay: 6.5s; }
+
+@keyframes sparkle {
+  0%, 100% { 
+    opacity: 0; 
+    transform: translateY(0) scale(0);
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: translateY(-30px) scale(1.2);
+  }
+}
+
+/* Mola-inspired geometric overlay */
+.geometric-overlay {
+  position: absolute;
   width: 100%;
   height: 100%;
   background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 215, 0, 0.02) 35px, rgba(255, 215, 0, 0.02) 70px),
-    repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(218, 18, 26, 0.02) 35px, rgba(218, 18, 26, 0.02) 70px);
-  opacity: 0.3;
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(207, 196, 147, 0.02) 60px, rgba(207, 196, 147, 0.02) 120px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(218, 18, 26, 0.02) 60px, rgba(218, 18, 26, 0.02) 120px),
+    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(0, 103, 71, 0.02) 80px, rgba(0, 103, 71, 0.02) 160px);
+  opacity: 0.4;
+  animation: geometricShift 40s linear infinite;
 }
+
+@keyframes geometricShift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(100px, 100px) rotate(5deg); }
+}
+
+/* Gradient waves */
+.wave-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 40%, rgba(218, 18, 26, 0.08) 0%, transparent 40%),
+              radial-gradient(ellipse at 70% 60%, rgba(0, 103, 71, 0.08) 0%, transparent 40%),
+              radial-gradient(ellipse at 50% 80%, rgba(207, 196, 147, 0.06) 0%, transparent 35%);
+  animation: waveRotate 50s linear infinite;
+}
+
+@keyframes waveRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1.1); }
+}
+
+/* ============================================
+   END ANIMATED BACKGROUND
+   ============================================ */
 
 /* NAVIGATION */
 nav {
@@ -102,17 +229,17 @@ nav {
   top: 0;
   width: 100%;
   padding: 20px 0;
-  background: rgba(10, 14, 39, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 14, 39, 0.88);
+  backdrop-filter: blur(15px);
   z-index: 1000;
-  border-bottom: 2px solid rgba(218, 18, 26, 0.2);
+  border-bottom: 2px solid rgba(207, 196, 147, 0.2);
   transition: all 0.3s ease;
 }
 
 nav.scrolled {
   padding: 15px 0;
   background: rgba(10, 14, 39, 0.95);
-  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  border-bottom: 2px solid rgba(0, 103, 71, 0.4);
 }
 
 nav .container {
@@ -128,7 +255,7 @@ nav .container {
   font-family: 'Playfair Display', serif;
   font-size: 26px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--sunset-gold), var(--tropical-coral), var(--panama-red));
+  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green), var(--panama-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -146,7 +273,7 @@ nav ul {
 nav a {
   color: var(--text-warm);
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 15px;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
@@ -160,12 +287,12 @@ nav a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--panama-red), var(--sunset-gold));
+  background: linear-gradient(90deg, var(--usf-green), var(--usf-gold));
   transition: width 0.3s ease;
 }
 
 nav a:hover {
-  color: var(--sunset-gold);
+  color: var(--usf-gold);
 }
 
 nav a:hover::after {
@@ -184,7 +311,7 @@ nav a:hover::after {
 }
 
 .hero-content {
-  max-width: 900px;
+  max-width: 950px;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -201,9 +328,9 @@ nav a:hover::after {
 
 .hero-subtitle {
   font-size: 16px;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  background: linear-gradient(90deg, var(--tropical-coral), var(--sunset-gold));
+  background: linear-gradient(90deg, var(--usf-green), var(--usf-gold), var(--panama-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -219,34 +346,60 @@ nav a:hover::after {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 72px;
+  font-size: 78px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   line-height: 1.2;
   background: linear-gradient(135deg, 
     var(--text-light) 0%, 
-    var(--sunset-gold) 40%, 
-    var(--tropical-coral) 70%,
+    var(--usf-gold) 35%, 
+    var(--usf-green) 65%,
     var(--panama-red) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: fadeInUp 1s ease-out 0.5s both;
+  text-shadow: 0 0 40px rgba(207, 196, 147, 0.1);
 }
 
 .hero-flags {
-  font-size: 32px;
-  margin-bottom: 25px;
+  font-size: 36px;
+  margin-bottom: 20px;
   animation: fadeIn 1s ease-out 0.6s both;
-  letter-spacing: 8px;
+  letter-spacing: 10px;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-out 0.65s both;
+}
+
+.badge {
+  padding: 8px 18px;
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.2), rgba(207, 196, 147, 0.2));
+  border: 1px solid rgba(207, 196, 147, 0.4);
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--usf-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .hero-description {
   font-size: 20px;
   color: var(--text-warm);
   margin-bottom: 40px;
-  line-height: 1.8;
+  line-height: 1.9;
   animation: fadeInUp 1s ease-out 0.7s both;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-buttons {
@@ -255,50 +408,76 @@ nav a:hover::after {
   justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 1s ease-out 0.9s both;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .btn {
-  padding: 16px 40px;
+  padding: 17px 42px;
   text-decoration: none;
   border-radius: 50px;
   font-weight: 600;
   font-size: 16px;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   display: inline-block;
   letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--panama-red), var(--tropical-coral), var(--sunset-gold));
+  background: linear-gradient(135deg, var(--usf-green), var(--usf-gold));
   color: white;
-  box-shadow: 0 4px 20px rgba(218, 18, 26, 0.4);
+  box-shadow: 0 5px 25px rgba(0, 103, 71, 0.4);
+  position: relative;
+  z-index: 1;
 }
 
 .btn-primary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(218, 18, 26, 0.6);
+  box-shadow: 0 10px 35px rgba(0, 103, 71, 0.6);
 }
 
 .btn-secondary {
-  border: 2px solid var(--sunset-gold);
-  color: var(--sunset-gold);
-  background: rgba(255, 215, 0, 0.05);
+  border: 2px solid var(--usf-gold);
+  color: var(--usf-gold);
+  background: rgba(207, 196, 147, 0.05);
+  position: relative;
+  z-index: 1;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 215, 0, 0.15);
+  background: rgba(207, 196, 147, 0.15);
   transform: translateY(-4px);
-  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 6px 25px rgba(207, 196, 147, 0.3);
+  border-color: var(--usf-green);
+  color: var(--usf-green);
 }
 
 /* SOCIAL LINKS IN HERO */
 .hero-social {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   justify-content: center;
   animation: fadeInUp 1s ease-out 1.1s both;
-  margin-top: 30px;
+  margin-top: 35px;
   flex-wrap: wrap;
 }
 
@@ -311,18 +490,18 @@ nav a:hover::after {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 11px 22px;
   border-radius: 25px;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(207, 196, 147, 0.25);
+  background: rgba(0, 103, 71, 0.08);
 }
 
 .hero-social a:hover {
-  color: var(--sunset-gold);
-  border-color: var(--sunset-gold);
-  background: rgba(255, 215, 0, 0.15);
+  color: var(--usf-gold);
+  border-color: var(--usf-gold);
+  background: rgba(207, 196, 147, 0.15);
   transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(207, 196, 147, 0.2);
 }
 
 /* SCROLL INDICATOR */
@@ -336,16 +515,17 @@ nav a:hover::after {
 
 @keyframes bounce {
   0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 12px); }
+  50% { transform: translate(-50%, 15px); }
 }
 
 .scroll-indicator::before {
   content: '↓';
-  font-size: 28px;
-  background: linear-gradient(135deg, var(--tropical-coral), var(--sunset-gold));
+  font-size: 30px;
+  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 10px rgba(207, 196, 147, 0.5));
 }
 
 /* SECTION STYLES */
@@ -361,11 +541,11 @@ section {
 
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: 52px;
+  font-size: 56px;
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, var(--sunset-gold), var(--tropical-coral), var(--panama-red));
+  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green), var(--panama-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -375,104 +555,78 @@ section {
   text-align: center;
   color: var(--text-warm);
   font-size: 18px;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 
 /* ABOUT SECTION */
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 70px;
   margin-top: 60px;
 }
 
 .about-text p {
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   color: var(--text-warm);
   font-size: 17px;
   line-height: 1.9;
 }
 
 .about-text strong {
-  color: var(--sunset-gold);
+  color: var(--usf-gold);
   font-weight: 600;
 }
 
 .cultural-statement {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.1), rgba(255, 215, 0, 0.1));
-  padding: 25px 30px;
+  background: linear-gradient(135deg, rgba(218, 18, 26, 0.12), rgba(0, 103, 71, 0.12));
+  padding: 28px 32px;
   border-radius: 15px;
-  border-left: 4px solid var(--panama-red);
-  margin: 30px 0;
+  border-left: 4px solid var(--usf-green);
+  margin: 35px 0;
   font-style: italic;
   color: var(--text-light);
   font-size: 18px;
-  line-height: 1.8;
+  line-height: 1.85;
+  box-shadow: 0 4px 20px rgba(0, 103, 71, 0.2);
 }
 
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 16px;
 }
 
 .skill-item {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.08), rgba(255, 215, 0, 0.08));
-  padding: 18px 22px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.1), rgba(207, 196, 147, 0.1));
+  padding: 19px 24px;
+  border-radius: 14px;
   text-align: center;
   font-weight: 500;
-  border: 1px solid rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(207, 196, 147, 0.25);
   transition: all 0.3s ease;
   color: var(--text-light);
 }
 
 .skill-item:hover {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.15), rgba(255, 215, 0, 0.15));
-  border-color: var(--sunset-gold);
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.2), rgba(207, 196, 147, 0.2));
+  border-color: var(--usf-gold);
   transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-}
-
-/* PROFILE PHOTO SECTION */
-.profile-section {
-  text-align: center;
-  margin: 80px 0;
-}
-
-.profile-photo {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid transparent;
-  background: linear-gradient(135deg, var(--panama-red), var(--sunset-gold)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  box-shadow: 0 10px 40px rgba(218, 18, 26, 0.3);
-  margin: 0 auto 30px;
-  display: block;
-}
-
-.profile-caption {
-  color: var(--text-warm);
-  font-size: 18px;
-  font-style: italic;
+  box-shadow: 0 6px 20px rgba(0, 103, 71, 0.25);
 }
 
 /* CONTACT SECTION */
 .contact-content {
   text-align: center;
-  max-width: 750px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .contact-text {
   font-size: 19px;
   color: var(--text-warm);
-  margin-bottom: 40px;
-  line-height: 1.8;
+  margin-bottom: 45px;
+  line-height: 1.85;
 }
 
 .social-links {
@@ -480,13 +634,13 @@ section {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 .social-link {
-  padding: 14px 32px;
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.1), rgba(255, 215, 0, 0.1));
-  border: 2px solid rgba(255, 215, 0, 0.3);
+  padding: 15px 34px;
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.12), rgba(207, 196, 147, 0.12));
+  border: 2px solid rgba(207, 196, 147, 0.35);
   border-radius: 30px;
   color: var(--text-light);
   text-decoration: none;
@@ -496,27 +650,45 @@ section {
 }
 
 .social-link:hover {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.2), rgba(255, 215, 0, 0.2));
-  border-color: var(--sunset-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.25), rgba(207, 196, 147, 0.25));
+  border-color: var(--usf-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 103, 71, 0.3);
 }
 
 /* PROJECTS SECTION */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  margin-top: 60px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 45px;
+  margin-top: 70px;
 }
 
 .project-card {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.05), rgba(0, 51, 160, 0.05));
-  border-radius: 20px;
-  padding: 40px;
-  border: 2px solid rgba(255, 215, 0, 0.15);
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.08), rgba(218, 18, 26, 0.06));
+  border-radius: 22px;
+  padding: 42px;
+  border: 2px solid rgba(207, 196, 147, 0.2);
   transition: all 0.4s ease;
   opacity: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(207, 196, 147, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
 }
 
 .project-card.visible {
@@ -525,27 +697,28 @@ section {
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  border-color: var(--sunset-gold);
-  box-shadow: 0 12px 40px rgba(218, 18, 26, 0.3);
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.1), rgba(255, 215, 0, 0.1));
+  transform: translateY(-12px);
+  border-color: var(--usf-gold);
+  box-shadow: 0 15px 45px rgba(0, 103, 71, 0.35);
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.15), rgba(207, 196, 147, 0.12));
 }
 
 .project-image {
-  font-size: 70px;
+  font-size: 75px;
   text-align: center;
-  margin-bottom: 25px;
-  height: 90px;
+  margin-bottom: 28px;
+  height: 95px;
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2));
 }
 
 .project-content h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 30px;
+  font-size: 32px;
   margin-bottom: 18px;
-  background: linear-gradient(135deg, var(--text-light), var(--sunset-gold));
+  background: linear-gradient(135deg, var(--text-light), var(--usf-gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -553,117 +726,98 @@ section {
 
 .project-content p {
   color: var(--text-warm);
-  margin-bottom: 22px;
-  line-height: 1.7;
+  margin-bottom: 24px;
+  line-height: 1.75;
   font-size: 16px;
 }
 
 .project-tags {
   display: flex;
-  gap: 10px;
+  gap: 11px;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .tag {
-  background: rgba(218, 18, 26, 0.15);
-  color: var(--tropical-coral);
-  padding: 7px 16px;
-  border-radius: 20px;
+  background: rgba(0, 103, 71, 0.2);
+  color: var(--usf-gold);
+  padding: 8px 17px;
+  border-radius: 22px;
   font-size: 13px;
   font-weight: 600;
-  border: 1px solid rgba(218, 18, 26, 0.3);
+  border: 1px solid rgba(207, 196, 147, 0.35);
 }
 
 .project-links {
   display: flex;
-  gap: 15px;
+  gap: 18px;
 }
 
 .project-link {
-  color: var(--sunset-gold);
+  color: var(--usf-gold);
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
-  padding: 8px 0;
+  padding: 10px 0;
   position: relative;
 }
 
 .project-link::after {
   content: '→';
-  margin-left: 5px;
+  margin-left: 6px;
   transition: margin-left 0.3s ease;
 }
 
 .project-link:hover {
-  color: var(--tropical-coral);
+  color: var(--usf-green);
 }
 
 .project-link:hover::after {
-  margin-left: 10px;
+  margin-left: 12px;
 }
 
-/* BEYOND CODE SECTION - Music + Photography Combined */
-.beyond-code-intro {
+/* MUSIC SECTION */
+.music-intro {
   text-align: center;
-  max-width: 800px;
+  max-width: 750px;
   margin: 0 auto 60px;
   color: var(--text-warm);
   font-size: 18px;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
-.creative-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  margin-top: 60px;
-}
-
-/* Music Side */
-.music-section h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 36px;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, var(--sunset-gold), var(--tropical-coral));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
-}
-
-.music-description {
-  text-align: center;
-  color: var(--text-warm);
-  margin-bottom: 30px;
-  font-style: italic;
+.music-grid {
+  max-width: 850px;
+  margin: 0 auto;
 }
 
 .audio-player {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.08), rgba(0, 51, 160, 0.08));
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 20px;
-  padding: 30px;
-  margin-bottom: 25px;
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.1), rgba(0, 51, 160, 0.08));
+  border: 1px solid rgba(207, 196, 147, 0.25);
+  border-radius: 22px;
+  padding: 35px;
+  margin-bottom: 28px;
+  transition: all 0.4s ease;
 }
 
 .audio-player:hover {
-  border-color: var(--sunset-gold);
-  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.2);
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.12), rgba(255, 215, 0, 0.12));
+  border-color: var(--usf-gold);
+  box-shadow: 0 8px 30px rgba(0, 103, 71, 0.25);
+  background: linear-gradient(135deg, rgba(0, 103, 71, 0.15), rgba(207, 196, 147, 0.12));
+  transform: translateY(-3px);
 }
 
 .track-art {
-  font-size: 48px;
+  font-size: 52px;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.2));
 }
 
 .track-info h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  margin-bottom: 8px;
+  font-size: 25px;
+  margin-bottom: 10px;
   text-align: center;
   color: var(--text-light);
 }
@@ -671,111 +825,70 @@ section {
 .track-info p {
   color: var(--text-warm);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   font-size: 15px;
+  font-style: italic;
 }
 
 audio {
   width: 100%;
   margin-top: 15px;
-  border-radius: 10px;
-  filter: saturate(1.3) hue-rotate(-10deg);
+  border-radius: 12px;
+  filter: saturate(1.2) hue-rotate(-5deg);
 }
 
-/* Photography Side */
-.photography-section h3 {
+.photography-cta {
+  text-align: center;
+  margin-top: 50px;
+  padding: 35px;
+  background: linear-gradient(135deg, rgba(218, 18, 26, 0.08), rgba(0, 103, 71, 0.08));
+  border-radius: 20px;
+  border: 2px solid rgba(207, 196, 147, 0.2);
+}
+
+.photography-cta h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 36px;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, var(--tropical-coral), var(--ocean-blue));
+  font-size: 28px;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--usf-gold), var(--panama-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-align: center;
 }
 
-.photography-description {
-  text-align: center;
+.photography-cta p {
   color: var(--text-warm);
-  margin-bottom: 30px;
-  font-style: italic;
-}
-
-.photo-mini-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
   margin-bottom: 25px;
-}
-
-.photo-mini-item {
-  position: relative;
-  aspect-ratio: 1;
-  border-radius: 15px;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(0, 51, 160, 0.1));
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.photo-mini-item:hover {
-  transform: scale(1.05);
-  border-color: var(--tropical-coral);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-}
-
-.photo-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-}
-
-.photo-mini-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.instagram-link {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-  color: var(--sunset-gold);
-  text-decoration: none;
-  font-weight: 600;
   font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.instagram-link:hover {
-  color: var(--tropical-coral);
-  transform: translateY(-2px);
 }
 
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 50px 20px;
+  padding: 55px 20px;
   color: var(--text-warm);
-  border-top: 2px solid rgba(255, 215, 0, 0.2);
-  background: linear-gradient(180deg, transparent, rgba(218, 18, 26, 0.05));
+  border-top: 2px solid rgba(207, 196, 147, 0.25);
+  background: linear-gradient(180deg, transparent, rgba(0, 103, 71, 0.05));
 }
 
 footer p {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 footer a {
-  color: var(--sunset-gold);
+  color: var(--usf-gold);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: var(--tropical-coral);
+  color: var(--usf-green);
+}
+
+.footer-icons {
+  font-size: 20px;
+  margin-bottom: 12px;
+  letter-spacing: 12px;
 }
 
 /* FADE-IN ANIMATION */
@@ -790,20 +903,15 @@ footer a:hover {
 
 /* RESPONSIVE */
 @media (max-width: 968px) {
-  .creative-grid {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-  
   .about-content {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 50px;
   }
 }
 
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 48px;
+    font-size: 52px;
   }
   
   .hero-description {
@@ -819,23 +927,45 @@ footer a:hover {
   }
   
   nav ul {
-    gap: 15px;
+    gap: 18px;
     font-size: 13px;
   }
   
   .section-title {
-    font-size: 38px;
+    font-size: 42px;
   }
   
-  .photo-mini-grid {
-    grid-template-columns: 1fr;
+  .orb {
+    filter: blur(60px);
   }
 }
 </style>
 </head>
 <body>
 
-<div class="gradient-bg"></div>
+<!-- PREMIUM ANIMATED BACKGROUND -->
+<div class="animated-bg">
+  <div class="bg-layer-base"></div>
+  <div class="wave-layer"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+  <div class="geometric-overlay"></div>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+</div>
 
 <nav id="navbar">
   <div class="container">
@@ -845,7 +975,7 @@ footer a:hover {
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#beyond-code">Beyond Code</a></li>
+      <li><a href="#music">Music</a></li>
     </ul>
   </div>
 </nav>
@@ -854,16 +984,21 @@ footer a:hover {
   <div class="hero-content">
     <div class="hero-subtitle">Developer • Musician • Creator</div>
     <h1>Nicolas Graham</h1>
-    <div class="hero-flags">🇵🇦 🇺🇸</div>
+    <div class="hero-flags">🇵🇦 🐂 🇺🇸</div>
+    <div class="hero-badges">
+      <span class="badge">Panamanian-American</span>
+      <span class="badge">USF Graduate 2025</span>
+      <span class="badge">Tampa Based</span>
+    </div>
     <p class="hero-description">
-      Building technology with heart. Panamanian-American developer creating applications that help people, composing ambient music for peaceful moments, and capturing beauty through photography. Recent USF graduate seeking to make an impact through technology.
+      Building technology with heart. Panamanian-American USF graduate creating applications that help people, composing ambient music for peaceful moments, and seeking to make an impact through code. Recent BS in Information Architecture — ready to bring empathy and innovation to IT teams in Tampa.
     </p>
     <div class="cta-buttons">
       <a href="#contact" class="btn btn-primary">Get In Touch</a>
       <a href="#projects" class="btn btn-secondary">View My Work</a>
     </div>
     
-    <!-- Social Media Links Prominently Featured -->
+    <!-- Social Media Links -->
     <div class="hero-social">
       <a href="https://www.instagram.com/nicofoxheart" target="_blank">📸 Instagram</a>
       <a href="https://github.com/NicoFoxheart" target="_blank">💻 GitHub</a>
@@ -877,23 +1012,16 @@ footer a:hover {
 <section id="about">
   <div class="container">
     <h2 class="section-title">About Me</h2>
-    <p class="section-subtitle">Developer. Musician. Photographer. Problem Solver.</p>
-    
-    <!-- Professional Photo Section -->
-    <div class="profile-section fade-in">
-      <!-- Replace this src with actual photo path -->
-      <img src="profile-photo.jpg" alt="Nicolas Graham" class="profile-photo">
-      <p class="profile-caption">Construyendo con corazón 💙</p>
-    </div>
+    <p class="section-subtitle">Developer. Musician. Community Builder. Problem Solver.</p>
     
     <div class="about-content">
       <div class="about-text fade-in">
         <p>
-          Hi, I'm <strong>Nicolas Graham</strong> — a recent graduate from the University of South Florida with a <strong>BS in Information Architecture</strong>. I'm passionate about building technology that makes a difference in people's lives.
+          Hi, I'm <strong>Nicolas Graham</strong> — a recent graduate from the <strong>University of South Florida</strong> with a <strong>BS in Information Architecture</strong>. I'm passionate about building technology that makes a difference in people's lives.
         </p>
         
         <div class="cultural-statement">
-          My Panamanian heritage taught me the power of community — that we rise together, not alone. Now I build technology that brings people together and creates safe spaces for those who need them.
+          My Panamanian heritage taught me the power of community — that we rise together, not alone. Now I build technology that brings people together and creates safe spaces for those who need them. 🇵🇦💙
         </div>
         
         <p>
@@ -904,6 +1032,9 @@ footer a:hover {
         </p>
         <p>
           Currently based in <strong>Tampa, FL</strong> 🌴, I'm seeking entry-level opportunities in IT and web development where I can contribute my skills, grow as a developer, and continue building technology that genuinely helps people.
+        </p>
+        <p style="margin-top: 25px; font-style: italic; color: var(--usf-gold);">
+          Go Bulls! 🐂💚💛
         </p>
       </div>
       
@@ -930,7 +1061,7 @@ footer a:hover {
     <h2 class="section-title">Let's Connect</h2>
     <div class="contact-content">
       <p class="contact-text">
-        I'm currently seeking entry-level opportunities in IT and web development in the Tampa area. Let's build something meaningful together — technology that serves people, not the other way around.
+        I'm currently seeking entry-level opportunities in IT and web development in the Tampa area. Let's build something meaningful together — technology that serves people, not the other way around. Reach out and let's talk about how I can contribute to your team.
       </p>
       
       <div class="social-links fade-in">
@@ -1016,111 +1147,83 @@ footer a:hover {
   </div>
 </section>
 
-<section id="beyond-code">
+<section id="music">
   <div class="container">
-    <h2 class="section-title">Beyond Code</h2>
-    <p class="section-subtitle">The human behind the developer</p>
+    <h2 class="section-title">Music</h2>
+    <p class="section-subtitle">The human behind the code</p>
     
-    <div class="beyond-code-intro fade-in">
+    <div class="music-intro fade-in">
       <p>
-        Technology is how I solve problems, but music and photography are how I connect with people. 
-        These aren't just hobbies — they're expressions of the same philosophy that guides my code: 
-        create spaces where people feel safe, seen, and at peace.
+        Technology is how I solve problems, but music is how I connect with souls. 
+        These ambient soundscapes are my way of creating peace in a chaotic world — 
+        one gentle note at a time. Close your eyes, breathe, and let the sound carry you somewhere safe.
       </p>
     </div>
     
-    <div class="creative-grid">
-      <!-- MUSIC SECTION -->
-      <div class="music-section fade-in">
-        <h3>🎵 Music</h3>
-        <p class="music-description">Ambient soundscapes for peaceful moments</p>
-        
-        <div class="audio-player">
-          <div class="track-art">🎵</div>
-          <div class="track-info">
-            <h4>Sleepy Rain</h4>
-            <p>For relaxation, study, and sleep</p>
-          </div>
-          <audio controls>
-            <source src="sleepy-rain.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
+    <div class="music-grid">
+      <div class="audio-player fade-in">
+        <div class="track-art">🎵</div>
+        <div class="track-info">
+          <h4>Sleepy Rain</h4>
+          <p>For relaxation, study, and sleep</p>
         </div>
-        
-        <div class="audio-player">
-          <div class="track-art">🌙</div>
-          <div class="track-info">
-            <h4>I Am With You Always</h4>
-            <p>Peaceful ambient soundscape</p>
-          </div>
-          <audio controls>
-            <source src="i-am-with-you-always.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-        
-        <div class="audio-player">
-          <div class="track-art">💫</div>
-          <div class="track-info">
-            <h4>I'll Never Leave You</h4>
-            <p>A promise in sound</p>
-          </div>
-          <audio controls>
-            <source src="ill-never-leave-you.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-        
-        <p style="color: var(--text-warm); margin-top: 25px; text-align: center; font-size: 15px;">
-          More tracks on <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank" style="color: var(--sunset-gold);">YouTube</a> 🎵
-        </p>
+        <audio controls>
+          <source src="sleepy-rain.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
       </div>
       
-      <!-- PHOTOGRAPHY SECTION -->
-      <div class="photography-section fade-in">
-        <h3>📸 Photography</h3>
-        <p class="photography-description">Capturing peaceful moments and ambient aesthetics</p>
-        
-        <div class="photo-mini-grid">
-          <!-- Placeholders - replace with actual photos -->
-          <div class="photo-mini-item">
-            <div class="photo-placeholder">🌅</div>
-          </div>
-          <div class="photo-mini-item">
-            <div class="photo-placeholder">🌊</div>
-          </div>
-          <div class="photo-mini-item">
-            <div class="photo-placeholder">🌙</div>
-          </div>
-          <div class="photo-mini-item">
-            <div class="photo-placeholder">✨</div>
-          </div>
+      <div class="audio-player fade-in">
+        <div class="track-art">🌙</div>
+        <div class="track-info">
+          <h4>I Am With You Always</h4>
+          <p>Peaceful ambient soundscape</p>
         </div>
-        
-        <a href="https://www.instagram.com/nicofoxheart" target="_blank" class="instagram-link">
-          View Full Portfolio on Instagram →
-        </a>
-        
-        <p style="color: var(--text-warm); margin-top: 30px; text-align: center; font-size: 15px; line-height: 1.7;">
-          Through my lens, I seek moments of stillness — the quiet beauty that exists between the noise. 
-          Each photograph is an invitation to pause, breathe, and notice the peace that's always been there.
+        <audio controls>
+          <source src="i-am-with-you-always.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      
+      <div class="audio-player fade-in">
+        <div class="track-art">💫</div>
+        <div class="track-info">
+          <h4>I'll Never Leave You</h4>
+          <p>A promise in sound — you're not alone</p>
+        </div>
+        <audio controls>
+          <source src="ill-never-leave-you.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      
+      <div class="photography-cta fade-in">
+        <h4>📸 Photography</h4>
+        <p>
+          Beyond music and code, I capture moments of stillness through photography. 
+          Each shot is an invitation to pause and notice the peace that's always been there.
         </p>
+        <a href="https://www.instagram.com/nicofoxheart" target="_blank" class="btn btn-secondary">
+          View My Photography on Instagram
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p style="font-size: 18px; margin-bottom: 10px;">🇵🇦 🦊 🇺🇸</p>
-  <p>&copy; 2026 Nicolas Graham. Built with passion in Tampa, FL.</p>
-  <p style="margin-top: 15px; font-size: 14px;">
+  <div class="footer-icons">🇵🇦 🦊 🐂 🇺🇸</div>
+  <p style="font-size: 18px;">&copy; 2026 Nicolas Graham</p>
+  <p>Built with passion in Tampa, FL 🌴</p>
+  <p style="margin-top: 18px; font-size: 14px;">
     <a href="https://www.instagram.com/nicofoxheart" target="_blank">Instagram</a> • 
     <a href="https://github.com/NicoFoxheart" target="_blank">GitHub</a> • 
     <a href="https://www.linkedin.com/in/nicolas-graham-2b61b8264" target="_blank">LinkedIn</a> • 
     <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank">YouTube</a>
   </p>
-  <p style="margin-top: 20px; font-size: 13px; font-style: italic; color: var(--text-warm);">
-    "Pa'lante siempre" — Always forward 💙
+  <p style="margin-top: 25px; font-size: 14px; font-style: italic; color: var(--usf-gold);">
+    "Pa'lante siempre" — Always forward 💙<br>
+    Go Bulls! 🐂💚💛
   </p>
 </footer>
 
@@ -1169,4 +1272,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 </body>
-  </html>
+</html>
