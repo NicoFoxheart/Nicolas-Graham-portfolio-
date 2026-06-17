@@ -3,408 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nicolas Graham - Developer, Musician, Creator</title>
-<meta name="description" content="Nicolas Graham - Panamanian-American USF graduate building technology with heart. BS in Applied Science (Information Architecture). Seeking IT opportunities in Tampa, FL">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Nicolas Graham — Developer · Cybersecurity · Creator</title>
+<meta name="description" content="Nicolas Graham — Panamanian-American developer building technology with heart. MS Cybersecurity candidate at USF Bellini College. Musician and photographer based in Tampa, FL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
 
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
 :root {
-  /* Panama + USF + Tampa Cultural Fusion */
-  --panama-red: #DA121A;
-  --usf-green: #006747;
-  --usf-gold: #CFC493;
-  --ocean-blue: #0033A0;
-  --tropical-coral: #FF6B6B;
-  --sunset-gold: #FFD700;
-  --deep-night: #0a0e27;
-  --soft-cream: #FFF8E7;
-  --text-light: #F5F5F5;
-  --text-warm: #FFE4B5;
+  --panama-red:     #DA121A;
+  --usf-green:      #006747;
+  --usf-green-light:#00855d;
+  --usf-gold:       #CFC493;
+  --usf-gold-bright:#E8D98A;
+  --ocean-blue:     #1a4db3;
+
+  --bg-root:        #05080f;
+  --bg-deep:        #080c1c;
+  --bg-mid:         #0d1225;
+  --bg-surface:     rgba(255,255,255,0.025);
+  --bg-surface-2:   rgba(255,255,255,0.05);
+
+  --text-primary:   #EEEEF5;
+  --text-secondary: #A8A8C0;
+  --text-accent:    #CFC493;
+  --text-muted:     rgba(255,255,255,0.38);
+
+  --border-subtle:  rgba(255,255,255,0.06);
+  --border-accent:  rgba(207,196,147,0.22);
+  --border-hover:   rgba(207,196,147,0.55);
+  --border-green:   rgba(0,103,71,0.4);
+
+  --glow-green:     0 0 40px rgba(0,103,71,0.25);
+  --glow-gold:      0 0 40px rgba(207,196,147,0.15);
+  --glow-red:       0 0 40px rgba(218,18,26,0.2);
+
+  --radius-sm:  10px;
+  --radius-md:  18px;
+  --radius-lg:  28px;
+  --radius-xl:  40px;
+
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-root); }
+::-webkit-scrollbar-thumb { background: var(--usf-green); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--usf-gold); }
 
 body {
   font-family: 'Work Sans', sans-serif;
-  background: var(--deep-night);
-  color: var(--text-light);
+  background: var(--bg-root);
+  color: var(--text-primary);
   overflow-x: hidden;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* ============================================
-   PREMIUM ANIMATED BACKGROUND - CULTURAL FUSION
-   ============================================ */
-
-.animated-bg {
+/* ============================================================
+   ANIMATED BACKGROUND
+   ============================================================ */
+.bg-canvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
   overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%, #0d1a2e 0%, var(--bg-root) 70%);
 }
 
-/* Base gradient layer */
-.bg-layer-base {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, 
-    #0a0e27 0%,
-    #0d1a1f 25%,
-    #1a1420 50%,
-    #0f1e1a 75%,
-    #0a0e27 100%);
-  animation: baseShift 30s ease-in-out infinite;
-}
-
-@keyframes baseShift {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
-}
-
-/* Floating orbs - Panama, USF, Tampa colors */
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.15;
-  animation: float 20s ease-in-out infinite;
+  filter: blur(100px);
+  animation: orbFloat linear infinite;
+  will-change: transform;
+}
+.orb-1 { width:700px;height:700px;background:radial-gradient(circle,rgba(0,103,71,0.18),transparent 70%);top:-15%;left:-10%;animation-duration:35s; }
+.orb-2 { width:600px;height:600px;background:radial-gradient(circle,rgba(218,18,26,0.12),transparent 70%);top:10%;right:-12%;animation-duration:40s;animation-delay:-10s; }
+.orb-3 { width:500px;height:500px;background:radial-gradient(circle,rgba(207,196,147,0.1),transparent 70%);bottom:5%;left:15%;animation-duration:30s;animation-delay:-5s; }
+.orb-4 { width:550px;height:550px;background:radial-gradient(circle,rgba(26,77,179,0.12),transparent 70%);bottom:20%;right:5%;animation-duration:45s;animation-delay:-20s; }
+
+@keyframes orbFloat {
+  0%,100%  { transform: translate(0,0) scale(1); }
+  25%      { transform: translate(60px,-80px) scale(1.08); }
+  50%      { transform: translate(-40px,50px) scale(0.94); }
+  75%      { transform: translate(30px,40px) scale(1.04); }
 }
 
-.orb-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, var(--panama-red), transparent);
-  top: -10%;
-  left: -10%;
-  animation-delay: 0s;
-  animation-duration: 25s;
-}
-
-.orb-2 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, var(--usf-green), transparent);
-  top: 20%;
-  right: -15%;
-  animation-delay: 3s;
-  animation-duration: 30s;
-}
-
-.orb-3 {
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, var(--usf-gold), transparent);
-  bottom: -10%;
-  left: 20%;
-  animation-delay: 6s;
-  animation-duration: 28s;
-}
-
-.orb-4 {
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, var(--ocean-blue), transparent);
-  bottom: 20%;
-  right: 10%;
-  animation-delay: 9s;
-  animation-duration: 32s;
-}
-
-.orb-5 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, var(--tropical-coral), transparent);
-  top: 50%;
-  left: 40%;
-  animation-delay: 12s;
-  animation-duration: 26s;
-}
-
-@keyframes float {
-  0%, 100% { 
-    transform: translate(0, 0) scale(1);
-  }
-  25% { 
-    transform: translate(50px, -60px) scale(1.1);
-  }
-  50% { 
-    transform: translate(-30px, 40px) scale(0.95);
-  }
-  75% { 
-    transform: translate(40px, 30px) scale(1.05);
-  }
-}
-
-/* Particle system */
-.particles {
+.noise-overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
 }
 
-.particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: var(--usf-gold);
-  border-radius: 50%;
-  opacity: 0;
-  animation: sparkle 8s ease-in-out infinite;
-}
-
-.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-.particle:nth-child(2) { left: 25%; top: 60%; animation-delay: 1.5s; }
-.particle:nth-child(3) { left: 40%; top: 30%; animation-delay: 3s; background: var(--panama-red); }
-.particle:nth-child(4) { left: 60%; top: 70%; animation-delay: 4.5s; background: var(--usf-green); }
-.particle:nth-child(5) { left: 75%; top: 40%; animation-delay: 6s; }
-.particle:nth-child(6) { left: 85%; top: 15%; animation-delay: 7.5s; background: var(--tropical-coral); }
-.particle:nth-child(7) { left: 15%; top: 80%; animation-delay: 2s; }
-.particle:nth-child(8) { left: 50%; top: 10%; animation-delay: 5s; background: var(--ocean-blue); }
-.particle:nth-child(9) { left: 70%; top: 55%; animation-delay: 3.5s; }
-.particle:nth-child(10) { left: 30%; top: 85%; animation-delay: 6.5s; }
-
-@keyframes sparkle {
-  0%, 100% { 
-    opacity: 0; 
-    transform: translateY(0) scale(0);
-  }
-  50% { 
-    opacity: 0.6; 
-    transform: translateY(-30px) scale(1.2);
-  }
-}
-
-/* Mola-inspired geometric overlay */
-.geometric-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(207, 196, 147, 0.02) 60px, rgba(207, 196, 147, 0.02) 120px),
-    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(218, 18, 26, 0.02) 60px, rgba(218, 18, 26, 0.02) 120px),
-    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(0, 103, 71, 0.02) 80px, rgba(0, 103, 71, 0.02) 160px);
-  opacity: 0.4;
-  animation: geometricShift 40s linear infinite;
-}
-
-@keyframes geometricShift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(100px, 100px) rotate(5deg); }
-}
-
-/* Gradient waves */
-.wave-layer {
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(ellipse at 30% 40%, rgba(218, 18, 26, 0.08) 0%, transparent 40%),
-              radial-gradient(ellipse at 70% 60%, rgba(0, 103, 71, 0.08) 0%, transparent 40%),
-              radial-gradient(ellipse at 50% 80%, rgba(207, 196, 147, 0.06) 0%, transparent 35%);
-  animation: waveRotate 50s linear infinite;
-}
-
-@keyframes waveRotate {
-  0% { transform: rotate(0deg) scale(1); }
-  100% { transform: rotate(360deg) scale(1.1); }
-}
-
-/* ============================================
-   FLOATING MUSIC PLAYER
-   ============================================ */
-
-.music-player-float {
+/* ============================================================
+   FLOATING MUSIC PLAYER (refined pill)
+   ============================================================ */
+.music-pill {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 28px;
+  right: 28px;
   z-index: 2000;
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.95), rgba(207, 196, 147, 0.95));
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(0, 103, 71, 0.4);
-  border: 2px solid rgba(207, 196, 147, 0.3);
-  min-width: 280px;
-  transition: all 0.3s ease;
-}
-
-.music-player-float.minimized {
-  padding: 15px;
-  min-width: auto;
-}
-
-.music-player-float:hover {
-  box-shadow: 0 12px 40px rgba(0, 103, 71, 0.6);
-  transform: translateY(-2px);
-}
-
-.player-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
 }
 
-.player-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.minimize-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 28px;
-  height: 28px;
+.music-toggle {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
+  background: linear-gradient(135deg, var(--usf-green), #004d35);
+  border: 1px solid rgba(207,196,147,0.3);
+  color: white;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 16px;
+  box-shadow: 0 4px 24px rgba(0,103,71,0.5);
+  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+}
+.music-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(0,103,71,0.7); }
+
+.music-panel {
+  background: rgba(8,12,28,0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  min-width: 270px;
+  box-shadow: var(--glow-green), 0 8px 40px rgba(0,0,0,0.6);
+  transform: translateY(10px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+}
+.music-panel.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
 }
 
-.minimize-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
+.music-panel-header {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--usf-gold);
+  margin-bottom: 14px;
+  font-weight: 600;
 }
 
-.player-content {
-  transition: all 0.3s ease;
-}
-
-.player-content.hidden {
-  display: none;
-}
-
-.track-name {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 12px;
+.track-name-display {
+  font-size: 15px;
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
   font-style: italic;
+  margin-bottom: 14px;
 }
 
 .player-controls {
   display: flex;
+  align-items: center;
   gap: 12px;
-  align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-.control-btn {
-  background: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.ctrl-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-accent);
   color: white;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.ctrl-btn:hover { background: rgba(0,103,71,0.3); border-color: var(--usf-gold); }
+
+.vol-row { display: flex; align-items: center; gap: 10px; }
+.vol-icon { font-size: 14px; color: var(--text-secondary); }
+.vol-slider {
+  flex: 1; -webkit-appearance: none; appearance: none;
+  height: 4px; border-radius: 2px;
+  background: linear-gradient(to right, var(--usf-green) 0%, var(--border-subtle) 50%);
+  outline: none; cursor: pointer;
+}
+.vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--usf-gold); cursor: pointer;
+  box-shadow: 0 0 8px rgba(207,196,147,0.5);
 }
 
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.35);
-  transform: scale(1.05);
-}
-
-.control-btn:active {
-  transform: scale(0.95);
-}
-
-.volume-control {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-}
-
-.volume-icon {
-  font-size: 16px;
-  color: white;
-}
-
-.volume-slider {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.3);
-  outline: none;
-  cursor: pointer;
-}
-
-.volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.volume-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.minimized .player-title {
-  margin-bottom: 0;
-}
-
-/* ============================================
-   END MUSIC PLAYER
-   ============================================ */
-
-/* NAVIGATION */
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
 nav {
   position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 20px 0;
-  background: rgba(10, 14, 39, 0.88);
-  backdrop-filter: blur(15px);
+  top: 0; width: 100%;
   z-index: 1000;
-  border-bottom: 2px solid rgba(207, 196, 147, 0.2);
-  transition: all 0.3s ease;
+  padding: 22px 0;
+  transition: var(--transition);
 }
-
 nav.scrolled {
-  padding: 15px 0;
-  background: rgba(10, 14, 39, 0.95);
-  border-bottom: 2px solid rgba(0, 103, 71, 0.4);
+  padding: 14px 0;
+  background: rgba(5,8,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-nav .container {
+.nav-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -412,789 +235,923 @@ nav .container {
 
 .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green), var(--panama-red));
+  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 35px;
+  gap: 38px;
+  align-items: center;
 }
 
 nav a {
-  color: var(--text-warm);
+  color: var(--text-secondary);
   text-decoration: none;
+  font-size: 14px;
   font-weight: 500;
-  font-size: 15px;
   letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  transition: color 0.3s;
   position: relative;
 }
-
 nav a::after {
   content: '';
   position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
   background: linear-gradient(90deg, var(--usf-green), var(--usf-gold));
   transition: width 0.3s ease;
 }
+nav a:hover { color: var(--usf-gold); }
+nav a:hover::after { width: 100%; }
 
-nav a:hover {
-  color: var(--usf-gold);
+.nav-cta {
+  padding: 9px 22px;
+  background: linear-gradient(135deg, var(--usf-green), #004d35);
+  border: 1px solid rgba(207,196,147,0.2);
+  border-radius: 40px;
+  color: white !important;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition) !important;
 }
-
-nav a:hover::after {
-  width: 100%;
+.nav-cta:hover {
+  box-shadow: 0 4px 20px rgba(0,103,71,0.5);
+  transform: translateY(-1px);
 }
+.nav-cta::after { display: none; }
 
-/* HERO SECTION */
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,8,15,0.97);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--usf-gold); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 120px 40px 80px;
+  padding: 130px 48px 100px;
   position: relative;
 }
 
 .hero-content {
-  max-width: 950px;
-  animation: fadeInUp 1s ease-out;
+  max-width: 900px;
+  animation: heroReveal 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
-@keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero-subtitle {
-  font-size: 16px;
-  letter-spacing: 4px;
+.hero-eyebrow {
+  font-size: 12px;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  background: linear-gradient(90deg, var(--usf-green), var(--usf-gold), var(--panama-red));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 20px;
+  color: var(--usf-green-light);
   font-weight: 600;
-  animation: fadeIn 1s ease-out 0.3s both;
+  margin-bottom: 22px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.3s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 78px;
+  font-size: clamp(54px, 8vw, 90px);
   font-weight: 700;
-  margin-bottom: 25px;
-  line-height: 1.2;
-  background: linear-gradient(135deg, 
-    var(--text-light) 0%, 
-    var(--usf-gold) 35%, 
-    var(--usf-green) 65%,
-    var(--panama-red) 100%);
+  line-height: 1.1;
+  margin-bottom: 22px;
+  background: linear-gradient(135deg,
+    #ffffff 0%,
+    var(--usf-gold-bright) 40%,
+    var(--usf-green-light) 70%,
+    #ffffff 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: fadeInUp 1s ease-out 0.5s both;
-  text-shadow: 0 0 40px rgba(207, 196, 147, 0.1);
+  animation: fadeUp 0.8s ease forwards 0.5s, gradientShift 8s ease infinite;
+  opacity: 0;
+}
+
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
 }
 
 .hero-flags {
-  font-size: 36px;
+  font-size: 28px;
+  letter-spacing: 12px;
   margin-bottom: 20px;
-  animation: fadeIn 1s ease-out 0.6s both;
-  letter-spacing: 10px;
-  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.65s;
 }
 
 .hero-badges {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
-  animation: fadeIn 1s ease-out 0.65s both;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.75s;
 }
 
 .badge {
-  padding: 8px 18px;
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.2), rgba(207, 196, 147, 0.2));
-  border: 1px solid rgba(207, 196, 147, 0.4);
-  border-radius: 25px;
-  font-size: 13px;
+  padding: 6px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-accent);
+  border-radius: 40px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--usf-gold);
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.hero-description {
-  font-size: 20px;
-  color: var(--text-warm);
-  margin-bottom: 40px;
-  line-height: 1.9;
-  animation: fadeInUp 1s ease-out 0.7s both;
-  max-width: 850px;
-  margin-left: auto;
-  margin-right: auto;
+.badge.cyber {
+  border-color: rgba(0,103,71,0.5);
+  color: var(--usf-green-light);
+  background: rgba(0,103,71,0.1);
 }
 
-.cta-buttons {
+.hero-bio {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--text-secondary);
+  line-height: 1.85;
+  max-width: 780px;
+  margin: 0 auto 38px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.85s;
+}
+
+.hero-bio strong {
+  color: var(--usf-gold);
+  font-weight: 600;
+}
+
+.hero-actions {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
-  animation: fadeInUp 1s ease-out 0.9s both;
-  margin-bottom: 35px;
+  margin-bottom: 42px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
 }
 
 .btn {
-  padding: 17px 42px;
-  text-decoration: none;
+  padding: 14px 36px;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 16px;
-  transition: all 0.4s ease;
-  display: inline-block;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.btn:hover::before {
-  width: 300px;
-  height: 300px;
+  font-size: 15px;
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.3px;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--usf-green), var(--usf-gold));
+  background: linear-gradient(135deg, var(--usf-green), #004d35);
   color: white;
-  box-shadow: 0 5px 25px rgba(0, 103, 71, 0.4);
-  position: relative;
-  z-index: 1;
+  border: 1px solid rgba(207,196,147,0.2);
+  box-shadow: 0 4px 24px rgba(0,103,71,0.35);
 }
-
 .btn-primary:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 35px rgba(0, 103, 71, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,103,71,0.55);
 }
 
-.btn-secondary {
-  border: 2px solid var(--usf-gold);
+.btn-outline {
+  background: transparent;
   color: var(--usf-gold);
-  background: rgba(207, 196, 147, 0.05);
-  position: relative;
-  z-index: 1;
+  border: 1px solid var(--border-accent);
+}
+.btn-outline:hover {
+  background: rgba(207,196,147,0.08);
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-gold);
 }
 
-.btn-secondary:hover {
-  background: rgba(207, 196, 147, 0.15);
-  transform: translateY(-4px);
-  box-shadow: 0 6px 25px rgba(207, 196, 147, 0.3);
-  border-color: var(--usf-green);
-  color: var(--usf-green);
-}
-
-/* SOCIAL LINKS IN HERO */
 .hero-social {
   display: flex;
-  gap: 20px;
+  gap: 14px;
   justify-content: center;
-  animation: fadeInUp 1s ease-out 1.1s both;
-  margin-top: 35px;
   flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.1s;
 }
 
 .hero-social a {
-  color: var(--text-warm);
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 22px;
-  border-radius: 25px;
-  border: 1px solid rgba(207, 196, 147, 0.25);
-  background: rgba(0, 103, 71, 0.08);
+  gap: 7px;
 }
-
 .hero-social a:hover {
   color: var(--usf-gold);
-  border-color: var(--usf-gold);
-  background: rgba(207, 196, 147, 0.15);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(207, 196, 147, 0.2);
+  border-color: var(--border-accent);
+  background: var(--bg-surface-2);
+  transform: translateY(-2px);
 }
 
-/* SCROLL INDICATOR */
-.scroll-indicator {
+.scroll-cue {
   position: absolute;
-  bottom: 40px;
+  bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
-  animation: bounce 2s infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: cueFloat 2.5s ease-in-out infinite;
+}
+.scroll-cue .cue-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--usf-green), transparent);
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 15px); }
+@keyframes cueFloat {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
 }
 
-.scroll-indicator::before {
-  content: '↓';
-  font-size: 30px;
-  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 10px rgba(207, 196, 147, 0.5));
-}
+/* ============================================================
+   SECTION SHARED
+   ============================================================ */
+section { padding: 110px 48px; position: relative; }
 
-/* SECTION STYLES */
-section {
-  padding: 120px 40px;
-  position: relative;
-}
+.container { max-width: 1200px; margin: 0 auto; }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+.section-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--usf-green-light);
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: 56px;
+  font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, var(--usf-gold), var(--usf-green), var(--panama-red));
+  line-height: 1.15;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--text-primary), var(--usf-gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.section-subtitle {
-  text-align: center;
-  color: var(--text-warm);
-  font-size: 18px;
-  margin-bottom: 70px;
+.section-sub {
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.75;
 }
 
-/* ABOUT SECTION */
-.about-content {
+.divider {
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--usf-green), var(--usf-gold));
+  border-radius: 2px;
+  margin: 20px 0 60px;
+}
+
+/* reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about { background: linear-gradient(180deg, transparent, rgba(0,103,71,0.03) 50%, transparent); }
+
+.about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 70px;
-  margin-top: 60px;
+  grid-template-columns: 1fr 400px;
+  gap: 80px;
+  align-items: start;
 }
 
 .about-text p {
-  margin-bottom: 26px;
-  color: var(--text-warm);
-  font-size: 17px;
+  color: var(--text-secondary);
+  font-size: 16.5px;
   line-height: 1.9;
+  margin-bottom: 24px;
 }
 
-.about-text strong {
+.about-text strong { color: var(--usf-gold); font-weight: 600; }
+
+.cultural-quote {
+  margin: 32px 0;
+  padding: 26px 30px;
+  background: linear-gradient(135deg, rgba(218,18,26,0.07), rgba(0,103,71,0.07));
+  border-left: 3px solid var(--usf-green);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  color: var(--text-primary);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+/* "Currently" card */
+.currently-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: sticky;
+  top: 100px;
+  backdrop-filter: blur(10px);
+}
+
+.currently-card h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--usf-green-light);
+  margin-bottom: 24px;
+}
+
+.status-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.status-item:last-child { border-bottom: none; }
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.dot-green { background: var(--usf-green-light); box-shadow: 0 0 8px var(--usf-green); animation: pulse 2s infinite; }
+.dot-gold  { background: var(--usf-gold); }
+.dot-blue  { background: var(--ocean-blue); }
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 6px rgba(0,133,93,0.6); }
+  50%      { box-shadow: 0 0 14px rgba(0,133,93,1); }
+}
+
+.status-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.status-text strong { color: var(--text-primary); display: block; font-size: 15px; margin-bottom: 2px; }
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+#skills { padding-top: 0; }
+
+.skills-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.skill-category {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  transition: var(--transition);
+}
+.skill-category:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-surface-2);
+  transform: translateY(-4px);
+  box-shadow: var(--glow-green);
+}
+
+.skill-category-icon { font-size: 28px; margin-bottom: 14px; }
+
+.skill-category h4 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   color: var(--usf-gold);
   font-weight: 600;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.cultural-statement {
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.12), rgba(0, 103, 71, 0.12));
-  padding: 28px 32px;
-  border-radius: 15px;
-  border-left: 4px solid var(--usf-green);
-  margin: 35px 0;
-  font-style: italic;
-  color: var(--text-light);
-  font-size: 18px;
-  line-height: 1.85;
-  box-shadow: 0 4px 20px rgba(0, 103, 71, 0.2);
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.skill-item {
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.1), rgba(207, 196, 147, 0.1));
-  padding: 19px 24px;
-  border-radius: 14px;
-  text-align: center;
-  font-weight: 500;
-  border: 1px solid rgba(207, 196, 147, 0.25);
-  transition: all 0.3s ease;
-  color: var(--text-light);
-}
-
-.skill-item:hover {
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.2), rgba(207, 196, 147, 0.2));
-  border-color: var(--usf-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 103, 71, 0.25);
-}
-
-/* CONTACT SECTION */
-.contact-content {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.contact-text {
-  font-size: 19px;
-  color: var(--text-warm);
-  margin-bottom: 45px;
-  line-height: 1.85;
-}
-
-.social-links {
+.skill-tags {
   display: flex;
-  justify-content: center;
-  gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 45px;
+  gap: 8px;
 }
 
-.social-link {
-  padding: 15px 34px;
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.12), rgba(207, 196, 147, 0.12));
-  border: 2px solid rgba(207, 196, 147, 0.35);
-  border-radius: 30px;
-  color: var(--text-light);
-  text-decoration: none;
+.skill-tag {
+  padding: 5px 12px;
+  background: rgba(0,103,71,0.12);
+  border: 1px solid var(--border-green);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
   font-weight: 500;
-  transition: all 0.3s ease;
-  display: inline-block;
 }
 
-.social-link:hover {
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.25), rgba(207, 196, 147, 0.25));
-  border-color: var(--usf-gold);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 103, 71, 0.3);
-}
-
-/* PROJECTS SECTION */
+/* ============================================================
+   PROJECTS
+   ============================================================ */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 45px;
-  margin-top: 70px;
+  gap: 28px;
+}
+
+/* Featured project spans full width */
+.project-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
 }
 
 .project-card {
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.08), rgba(218, 18, 26, 0.06));
-  border-radius: 22px;
-  padding: 42px;
-  border: 2px solid rgba(207, 196, 147, 0.2);
-  transition: all 0.4s ease;
-  opacity: 0;
-  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  transition: var(--transition);
+  position: relative;
 }
 
 .project-card::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(207, 196, 147, 0.1) 0%, transparent 70%);
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(207,196,147,0.05) 0%, transparent 60%);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s;
 }
-
-.project-card:hover::before {
-  opacity: 1;
-}
-
-.project-card.visible {
-  opacity: 1;
-  animation: fadeInUp 0.6s ease-out forwards;
-}
+.project-card:hover::before { opacity: 1; }
 
 .project-card:hover {
-  transform: translateY(-12px);
-  border-color: var(--usf-gold);
-  box-shadow: 0 15px 45px rgba(0, 103, 71, 0.35);
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.15), rgba(207, 196, 147, 0.12));
+  border-color: var(--border-accent);
+  transform: translateY(-8px);
+  box-shadow: var(--glow-green), 0 20px 60px rgba(0,0,0,0.4);
 }
 
-.project-image {
-  font-size: 75px;
-  text-align: center;
-  margin-bottom: 28px;
-  height: 95px;
+.project-visual {
+  background: linear-gradient(135deg, rgba(0,103,71,0.15), rgba(218,18,26,0.08));
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2));
+  font-size: 80px;
+  min-height: 220px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
 }
 
-.project-content h3 {
+.project-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(207,196,147,0.08) 0%, transparent 70%);
+}
+
+.featured .project-visual {
+  min-height: 100%;
+  border-bottom: none;
+  border-right: 1px solid var(--border-subtle);
+  font-size: 100px;
+}
+
+.project-body { padding: 32px; }
+.featured .project-body { padding: 44px; display: flex; flex-direction: column; justify-content: center; }
+
+.project-featured-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--usf-green-light);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 14px;
+}
+.project-featured-label::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--usf-green-light);
+  animation: pulse 2s infinite;
+}
+
+.project-body h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  margin-bottom: 18px;
-  background: linear-gradient(135deg, var(--text-light), var(--usf-gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-primary);
 }
 
-.project-content p {
-  color: var(--text-warm);
-  margin-bottom: 24px;
-  line-height: 1.75;
-  font-size: 16px;
+.project-body p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 22px;
 }
 
 .project-tags {
   display: flex;
-  gap: 11px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 26px;
 }
 
 .tag {
-  background: rgba(0, 103, 71, 0.2);
+  padding: 5px 13px;
+  background: rgba(0,103,71,0.12);
+  border: 1px solid var(--border-green);
+  border-radius: 20px;
+  font-size: 12px;
   color: var(--usf-gold);
-  padding: 8px 17px;
-  border-radius: 22px;
-  font-size: 13px;
   font-weight: 600;
-  border: 1px solid rgba(207, 196, 147, 0.35);
 }
 
-.project-links {
-  display: flex;
-  gap: 18px;
-}
+.project-links { display: flex; gap: 16px; flex-wrap: wrap; }
 
-.project-link {
+.proj-link {
   color: var(--usf-gold);
   text-decoration: none;
+  font-size: 14px;
   font-weight: 600;
-  transition: all 0.3s ease;
-  padding: 10px 0;
-  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: var(--transition);
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+}
+.proj-link:hover { color: var(--usf-green-light); border-color: var(--usf-green-light); }
+.proj-link-arrow { transition: transform 0.3s; }
+.proj-link:hover .proj-link-arrow { transform: translateX(4px); }
+
+/* ============================================================
+   MUSIC
+   ============================================================ */
+#music {
+  background: linear-gradient(180deg, transparent, rgba(0,51,160,0.04) 50%, transparent);
 }
 
-.project-link::after {
-  content: '→';
-  margin-left: 6px;
-  transition: margin-left 0.3s ease;
-}
-
-.project-link:hover {
-  color: var(--usf-green);
-}
-
-.project-link:hover::after {
-  margin-left: 12px;
-}
-
-/* MUSIC SECTION */
 .music-intro {
-  text-align: center;
-  max-width: 750px;
-  margin: 0 auto 60px;
-  color: var(--text-warm);
-  font-size: 18px;
+  max-width: 700px;
+  font-size: 17px;
+  color: var(--text-secondary);
   line-height: 1.85;
+  margin-bottom: 56px;
+  font-style: italic;
 }
 
 .music-grid {
-  max-width: 850px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+  max-width: 1000px;
 }
 
-.audio-player {
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.1), rgba(0, 51, 160, 0.08));
-  border: 1px solid rgba(207, 196, 147, 0.25);
-  border-radius: 22px;
-  padding: 35px;
-  margin-bottom: 28px;
-  transition: all 0.4s ease;
-}
-
-.audio-player:hover {
-  border-color: var(--usf-gold);
-  box-shadow: 0 8px 30px rgba(0, 103, 71, 0.25);
-  background: linear-gradient(135deg, rgba(0, 103, 71, 0.15), rgba(207, 196, 147, 0.12));
-  transform: translateY(-3px);
-}
-
-.track-art {
-  font-size: 52px;
+.audio-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  transition: var(--transition);
   text-align: center;
-  margin-bottom: 18px;
-  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.2));
+}
+.audio-card:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-surface-2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,51,160,0.15);
 }
 
-.track-info h4 {
+.track-art { font-size: 44px; margin-bottom: 14px; }
+
+.track-title {
   font-family: 'Playfair Display', serif;
-  font-size: 25px;
-  margin-bottom: 10px;
-  text-align: center;
-  color: var(--text-light);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
 }
 
-.track-info p {
-  color: var(--text-warm);
-  text-align: center;
-  margin-bottom: 22px;
-  font-size: 15px;
+.track-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
   font-style: italic;
 }
 
 audio {
   width: 100%;
-  margin-top: 15px;
-  border-radius: 12px;
-  filter: saturate(1.2) hue-rotate(-5deg);
+  border-radius: 8px;
+  filter: invert(1) hue-rotate(180deg) saturate(0.8);
+  opacity: 0.8;
 }
 
-.photography-cta {
+.photo-card {
+  background: linear-gradient(135deg, rgba(218,18,26,0.06), rgba(207,196,147,0.06));
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  padding: 36px 28px;
   text-align: center;
-  margin-top: 50px;
-  padding: 35px;
-  background: linear-gradient(135deg, rgba(218, 18, 26, 0.08), rgba(0, 103, 71, 0.08));
-  border-radius: 20px;
-  border: 2px solid rgba(207, 196, 147, 0.2);
+  transition: var(--transition);
+}
+.photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-red);
 }
 
-.photography-cta h4 {
+.photo-card h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
   background: linear-gradient(135deg, var(--usf-gold), var(--panama-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-.photography-cta p {
-  color: var(--text-warm);
-  margin-bottom: 25px;
-  font-size: 16px;
+.photo-card p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 24px;
 }
 
-/* FOOTER */
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact { text-align: center; }
+
+.contact-inner { max-width: 700px; margin: 0 auto; }
+
+.contact-text {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 48px;
+}
+
+.social-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+
+.social-btn {
+  padding: 13px 28px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 40px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.social-btn:hover {
+  background: var(--bg-surface-2);
+  border-color: var(--border-accent);
+  color: var(--usf-gold);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-gold);
+}
+
+.email-cta { margin-top: 8px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
 footer {
+  padding: 52px 48px;
+  border-top: 1px solid var(--border-subtle);
   text-align: center;
-  padding: 55px 20px;
-  color: var(--text-warm);
-  border-top: 2px solid rgba(207, 196, 147, 0.25);
-  background: linear-gradient(180deg, transparent, rgba(0, 103, 71, 0.05));
+  background: linear-gradient(180deg, transparent, rgba(0,103,71,0.03));
 }
+
+.footer-icons { font-size: 22px; letter-spacing: 14px; margin-bottom: 18px; }
 
 footer p {
-  margin-bottom: 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.7;
 }
 
-footer a {
-  color: var(--usf-gold);
+.footer-links { display: flex; justify-content: center; gap: 24px; margin: 20px 0; }
+.footer-links a {
+  color: var(--text-muted);
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 13px;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--usf-gold); }
+
+.footer-motto {
+  margin-top: 28px;
+  font-style: italic;
+  color: var(--usf-gold);
+  font-size: 14px;
+  opacity: 0.8;
 }
 
-footer a:hover {
-  color: var(--usf-green);
-}
-
-.footer-icons {
-  font-size: 20px;
-  margin-bottom: 12px;
-  letter-spacing: 12px;
-}
-
-/* FADE-IN ANIMATION */
-.fade-in {
-  opacity: 0;
-  transition: opacity 0.6s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-}
-
-/* RESPONSIVE */
-@media (max-width: 968px) {
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-  
-  .music-player-float {
-    bottom: 20px;
-    right: 20px;
-    min-width: 240px;
-  }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .currently-card { position: static; }
+  .project-card.featured { grid-template-columns: 1fr; }
+  .featured .project-visual { min-height: 200px; border-right: none; border-bottom: 1px solid var(--border-subtle); }
 }
 
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 52px;
-  }
-  
-  .hero-description {
-    font-size: 17px;
-  }
-  
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  nav ul {
-    gap: 18px;
-    font-size: 13px;
-  }
-  
-  .section-title {
-    font-size: 42px;
-  }
-  
-  .orb {
-    filter: blur(60px);
-  }
-  
-  .music-player-float {
-    bottom: 15px;
-    right: 15px;
-    min-width: 220px;
-    padding: 15px;
-  }
+  section { padding: 80px 24px; }
+  .nav-inner { padding: 0 24px; }
+  nav ul { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding: 110px 24px 80px; }
+  .hero h1 { font-size: 48px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: 1; }
+  .music-grid { grid-template-columns: 1fr; }
+  .skills-categories { grid-template-columns: 1fr 1fr; }
+  .music-pill { bottom: 18px; right: 18px; }
 }
+
+@media (max-width: 480px) {
+  .skills-categories { grid-template-columns: 1fr; }
+  .hero-badges { gap: 8px; }
+  .badge { font-size: 10px; padding: 5px 12px; }
+}
+
 </style>
 </head>
 <body>
 
-<!-- PREMIUM ANIMATED BACKGROUND -->
-<div class="animated-bg">
-  <div class="bg-layer-base"></div>
-  <div class="wave-layer"></div>
+<!-- BACKGROUND -->
+<div class="bg-canvas">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
   <div class="orb orb-4"></div>
-  <div class="orb orb-5"></div>
-  <div class="geometric-overlay"></div>
-  <div class="particles">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-  </div>
+  <div class="noise-overlay"></div>
 </div>
 
 <!-- FLOATING MUSIC PLAYER -->
-<div class="music-player-float" id="musicPlayer">
-  <div class="player-header">
-    <div class="player-title">
-      <span>🎵</span>
-      <span id="playerTitleText">Ambient Music</span>
-    </div>
-    <button class="minimize-btn" id="minimizeBtn" title="Minimize">−</button>
-  </div>
-  <div class="player-content" id="playerContent">
-    <div class="track-name">Sleepy Rain</div>
+<div class="music-pill">
+  <div class="music-panel" id="musicPanel">
+    <div class="music-panel-header">🎵 Now Playing</div>
+    <div class="track-name-display" id="trackDisplay">Sleepy Rain</div>
     <div class="player-controls">
-      <button class="control-btn" id="playPauseBtn" title="Play">▶</button>
-      <div class="volume-control">
-        <span class="volume-icon">🔊</span>
-        <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
-      </div>
+      <button class="ctrl-btn" id="prevBtn" title="Previous">⏮</button>
+      <button class="ctrl-btn" id="playBtn" title="Play">▶</button>
+      <button class="ctrl-btn" id="nextBtn" title="Next">⏭</button>
+    </div>
+    <div class="vol-row">
+      <span class="vol-icon">🔉</span>
+      <input type="range" min="0" max="100" value="45" class="vol-slider" id="volSlider">
     </div>
   </div>
-  <audio id="bgMusic" loop>
+  <button class="music-toggle" id="musicToggle" title="Music">🎵</button>
+  <audio id="audioEl" loop>
     <source src="sleepy-rain.mp3" type="audio/mpeg">
   </audio>
 </div>
 
+<!-- NAV -->
 <nav id="navbar">
-  <div class="container">
-    <div class="logo">NG 🦊</div>
+  <div class="nav-inner">
+    <a href="#home" class="logo">NG 🦊</a>
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#music">Music</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" class="mobile-link">Home</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#projects" class="mobile-link">Projects</a>
+  <a href="#music" class="mobile-link">Music</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-content">
-    <div class="hero-subtitle">Developer • Musician • Creator</div>
+    <div class="hero-eyebrow">Developer · Cybersecurity · Creator</div>
     <h1>Nicolas Graham</h1>
-    <div class="hero-flags">🇵🇦 🐂 🇺🇸</div>
+    <div class="hero-flags">🇵🇦 🦊 🇺🇸</div>
     <div class="hero-badges">
       <span class="badge">Panamanian-American</span>
-      <span class="badge">USF Graduate 2025</span>
-      <span class="badge">Tampa Based</span>
+      <span class="badge">USF Applied Science '25</span>
+      <span class="badge cyber">MS Cybersecurity — Fall 2026</span>
+      <span class="badge">Tampa, FL</span>
     </div>
-    <p class="hero-description">
-      Building technology with heart. Panamanian-American USF graduate creating applications that help people, composing ambient music for peaceful moments, and seeking to make an impact through code. Recent BS in Applied Science (Information Architecture) — ready to bring empathy and innovation to IT teams in Tampa.
+    <p class="hero-bio">
+      I build <strong>technology that cares</strong>. From mental health tools to digital safety platforms,
+      my work lives at the intersection of security and humanity — code that protects people
+      and reminds them they matter. Heading into a <strong>Master's in Cybersecurity</strong> at USF's Bellini College,
+      with a camera in hand and ambient music in my headphones.
     </p>
-    <div class="cta-buttons">
-      <a href="#contact" class="btn btn-primary">Get In Touch</a>
-      <a href="#projects" class="btn btn-secondary">View My Work</a>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View My Work ↓</a>
+      <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
     </div>
-    
-    <!-- Social Media Links -->
     <div class="hero-social">
       <a href="https://www.instagram.com/nicofoxheart" target="_blank">📸 Instagram</a>
       <a href="https://github.com/NicoFoxheart" target="_blank">💻 GitHub</a>
@@ -1202,329 +1159,500 @@ footer a:hover {
       <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank">🎵 YouTube</a>
     </div>
   </div>
-  <div class="scroll-indicator"></div>
+  <div class="scroll-cue">
+    <div class="cue-line"></div>
+    <span>Scroll</span>
+  </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
-    <h2 class="section-title">About Me</h2>
-    <p class="section-subtitle">Developer. Musician. Community Builder. Problem Solver.</p>
-    
-    <div class="about-content">
-      <div class="about-text fade-in">
+    <div class="section-label">// about me</div>
+    <h2 class="section-title">The person<br><em>behind the code</em></h2>
+    <div class="divider"></div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
         <p>
-          Hi, I'm <strong>Nicolas Graham</strong> — a recent graduate from the <strong>University of South Florida</strong> with a <strong>BS in Applied Science, concentration in Information Architecture</strong>. I'm passionate about building technology that makes a difference in people's lives.
+          Hi, I'm <strong>Nicolas Graham</strong> — a recent graduate of the
+          <strong>University of South Florida</strong> with a BS in Applied Science
+          (Information Architecture), and I'm heading into a
+          <strong>Master's in Cybersecurity at USF's Bellini College</strong> in Fall 2026.
+          My work sits at the intersection of technology and humanity.
         </p>
-        
-        <div class="cultural-statement">
-          My Panamanian heritage taught me the power of community — that we rise together, not alone. Now I build technology that brings people together and creates safe spaces for those who need them. 🇵🇦💙
+
+        <div class="cultural-quote">
+          My Panamanian heritage taught me the power of community — that we rise together,
+          not alone. Now I build technology that brings people together and creates safe
+          spaces for those who feel unseen. 🇵🇦💙
         </div>
-        
+
         <p>
-          From mental health applications to IT management systems, I create solutions that are both functional and meaningful. When I'm not coding, you'll find me composing ambient music that soothes the soul or capturing peaceful moments through photography.
+          I've built a mental health support tool, a wellness tracker designed around honesty
+          instead of toxic positivity, a digital safety hub to protect the most vulnerable
+          people online, and interactive experiences made to remind people they matter.
+          The thread running through all of it: <strong>technology should care for people</strong>.
         </p>
         <p>
-          I also moderate a <strong>Discord community of 500+ members</strong>, where I've learned the importance of creating safe, supportive digital spaces. This experience shapes how I approach every project — with empathy, intention, and care for the people who will use what I build.
+          Outside of code, I moderate a <strong>Discord community of 500+ members</strong>,
+          shoot photography drawn to nature, light, and quiet skies, and compose ambient music
+          that holds real emotion. I connect deeply across cultures and distances — and I'm
+          learning to point some of that same care back toward myself.
         </p>
-        <p>
-          Currently based in <strong>Tampa, FL</strong> 🌴, I'm seeking entry-level opportunities in IT and web development where I can contribute my skills, grow as a developer, and continue building technology that genuinely helps people.
-        </p>
-        <p style="margin-top: 25px; font-style: italic; color: var(--usf-gold);">
-          Go Bulls! 🐂💚💛
+        <p style="font-style:italic;color:var(--usf-gold);margin-top:20px;">
+          Pa'lante siempre — Always forward. 🐂💚💛
         </p>
       </div>
-      
-      <div class="skills-grid fade-in">
-        <div class="skill-item">Python • JavaScript</div>
-        <div class="skill-item">HTML • CSS • React</div>
-        <div class="skill-item">Information Architecture</div>
-        <div class="skill-item">UI/UX Design</div>
-        <div class="skill-item">Web Development</div>
-        <div class="skill-item">System Design</div>
-        <div class="skill-item">Problem Solving</div>
-        <div class="skill-item">Music Production</div>
-        <div class="skill-item">Community Management</div>
-        <div class="skill-item">CompTIA A+ (In Progress)</div>
-        <div class="skill-item">Bilingual (English/Spanish)</div>
-        <div class="skill-item">Empathy-Driven Development</div>
+
+      <div class="currently-card reveal">
+        <h4>// currently</h4>
+
+        <div class="status-item">
+          <div class="status-dot dot-green"></div>
+          <div class="status-text">
+            <strong>Open to Opportunities</strong>
+            Seeking cybersecurity & IT roles in Tampa, FL
+          </div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-dot dot-gold"></div>
+          <div class="status-text">
+            <strong>MS Cybersecurity — Starting Fall 2026</strong>
+            USF Bellini College of Engineering
+          </div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-dot dot-blue"></div>
+          <div class="status-text">
+            <strong>CompTIA A+ — In Progress</strong>
+            Expanding foundational IT certification
+          </div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-dot dot-gold"></div>
+          <div class="status-text">
+            <strong>Building in Public</strong>
+            New projects on digital safety & wellness
+          </div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-dot" style="background:var(--panama-red);"></div>
+          <div class="status-text">
+            <strong>Music & Photography</strong>
+            Creating ambient tracks & capturing quiet skies
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<!-- SKILLS -->
+<section id="skills">
   <div class="container">
-    <h2 class="section-title">Let's Connect</h2>
-    <div class="contact-content">
-      <p class="contact-text">
-        I'm currently seeking entry-level opportunities in IT and web development in the Tampa area. Let's build something meaningful together — technology that serves people, not the other way around. Reach out and let's talk about how I can contribute to your team.
-      </p>
-      
-      <div class="social-links fade-in">
-        <a href="https://www.instagram.com/nicofoxheart" target="_blank" class="social-link">
-          <span>📸 Instagram</span>
-        </a>
-        <a href="https://github.com/NicoFoxheart" target="_blank" class="social-link">
-          <span>💻 GitHub</span>
-        </a>
-        <a href="https://www.linkedin.com/in/nicolas-graham-2b61b8264" target="_blank" class="social-link">
-          <span>💼 LinkedIn</span>
-        </a>
-        <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank" class="social-link">
-          <span>🎵 YouTube</span>
-        </a>
+    <div class="section-label">// skills & tools</div>
+    <h2 class="section-title">What I bring</h2>
+    <div class="divider"></div>
+
+    <div class="skills-categories">
+      <div class="skill-category reveal">
+        <div class="skill-category-icon">🛡️</div>
+        <h4>Security</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Digital Safety</span>
+          <span class="skill-tag">Phishing Prevention</span>
+          <span class="skill-tag">Privacy Practices</span>
+          <span class="skill-tag">CompTIA A+ (In Progress)</span>
+          <span class="skill-tag">Security Awareness</span>
+        </div>
       </div>
-      
-      <div class="cta-buttons fade-in">
-        <a href="mailto:ngraham91@outlook.com" class="btn btn-primary">Send Email</a>
+
+      <div class="skill-category reveal">
+        <div class="skill-category-icon">💻</div>
+        <h4>Development</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">HTML & CSS</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">REST APIs</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal">
+        <div class="skill-category-icon">🎨</div>
+        <h4>Design & Systems</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">UI/UX Design</span>
+          <span class="skill-tag">Information Architecture</span>
+          <span class="skill-tag">System Design</span>
+          <span class="skill-tag">Accessibility</span>
+        </div>
+      </div>
+
+      <div class="skill-category reveal">
+        <div class="skill-category-icon">🌎</div>
+        <h4>Human Skills</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Bilingual — EN / ES</span>
+          <span class="skill-tag">Community Management</span>
+          <span class="skill-tag">Empathy-Driven Dev</span>
+          <span class="skill-tag">Music Production</span>
+          <span class="skill-tag">Photography</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="container">
-    <h2 class="section-title">Projects</h2>
-    <p class="section-subtitle">Building solutions that matter</p>
-    
+    <div class="section-label">// projects</div>
+    <h2 class="section-title">Work that matters</h2>
+    <div class="divider"></div>
+
     <div class="projects-grid">
-      <div class="project-card fade-in">
-        <div class="project-image">🌟</div>
-        <div class="project-content">
+
+      <!-- FEATURED: Digital Safety Hub -->
+      <div class="project-card featured reveal">
+        <div class="project-visual">🛡️</div>
+        <div class="project-body">
+          <div class="project-featured-label">Featured Project</div>
+          <h3>Digital Safety Hub</h3>
+          <p>
+            A free platform teaching people to protect themselves online — phishing awareness,
+            privacy guides, and digital safety tools built for the most vulnerable. Technology
+            that defends the people who feel unseen. This is the project closest to my cybersecurity path.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Cybersecurity</span>
+            <span class="tag">Education</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Privacy</span>
+            <span class="tag">Phishing Prevention</span>
+          </div>
+          <div class="project-links">
+            <a href="https://nicofoxheart.github.io/Digital-Safety-Hub/" target="_blank" class="proj-link">
+              Live Site <span class="proj-link-arrow">→</span>
+            </a>
+            <a href="https://github.com/NicoFoxheart" target="_blank" class="proj-link">
+              GitHub <span class="proj-link-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Haven -->
+      <div class="project-card reveal">
+        <div class="project-visual">🌟</div>
+        <div class="project-body">
           <h3>Haven</h3>
-          <p>A mental health support application providing calming breathing exercises and peaceful resources for those in need. Built with care to help people find moments of peace when the world feels overwhelming.</p>
+          <p>
+            A mental health support app with calming breathing exercises and peaceful resources.
+            Built to help people find moments of peace when the world feels overwhelming.
+          </p>
           <div class="project-tags">
             <span class="tag">React</span>
             <span class="tag">UI/UX</span>
             <span class="tag">Mental Health</span>
-            <span class="tag">Empathy-Driven</span>
           </div>
           <div class="project-links">
-            <a href="https://nico-breathing.netlify.app" target="_blank" class="project-link">Live Demo</a>
+            <a href="https://nico-breathing.netlify.app" target="_blank" class="proj-link">
+              Live Demo <span class="proj-link-arrow">→</span>
+            </a>
           </div>
         </div>
       </div>
-      
-      <div class="project-card fade-in" style="animation-delay: 0.2s">
-        <div class="project-image">🎫</div>
-        <div class="project-content">
+
+      <!-- Atlas -->
+      <div class="project-card reveal">
+        <div class="project-visual">🗺️</div>
+        <div class="project-body">
+          <h3>Atlas — Your Journey</h3>
+          <p>
+            A wellness tracker designed around honesty instead of toxic positivity.
+            Tracks your journey with intention — celebrating real progress, not performance.
+          </p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Wellness</span>
+            <span class="tag">UX Design</span>
+          </div>
+          <div class="project-links">
+            <a href="https://nicofoxheart.github.io/atlas/" target="_blank" class="proj-link">
+              Live Demo <span class="proj-link-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- IT Command Center -->
+      <div class="project-card reveal">
+        <div class="project-visual">💻</div>
+        <div class="project-body">
+          <h3>IT Command Center</h3>
+          <p>
+            Real-time operations dashboard with system monitoring, server status tracking,
+            and security alerts. Built for operational excellence and proactive problem-solving.
+          </p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Real-time</span>
+            <span class="tag">Monitoring</span>
+          </div>
+          <div class="project-links">
+            <a href="https://nicofoxheart.github.io/it-command-center/" target="_blank" class="proj-link">
+              Live Demo <span class="proj-link-arrow">→</span>
+            </a>
+            <a href="https://github.com/NicoFoxheart" target="_blank" class="proj-link">
+              GitHub <span class="proj-link-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HelpDesk -->
+      <div class="project-card reveal">
+        <div class="project-visual">🎫</div>
+        <div class="project-body">
           <h3>HelpDesk</h3>
-          <p>Professional IT ticket management system with priority handling, status tracking, and comprehensive reporting. Designed for efficiency, clarity, and supporting both IT teams and end users.</p>
+          <p>
+            Professional IT ticket management system with priority handling, status tracking,
+            and reporting — designed for IT teams and the people they support.
+          </p>
           <div class="project-tags">
             <span class="tag">JavaScript</span>
             <span class="tag">IT Support</span>
             <span class="tag">Management</span>
-            <span class="tag">User-Centered</span>
           </div>
           <div class="project-links">
-            <a href="https://nico-helpdesk.netlify.app" target="_blank" class="project-link">Live Demo</a>
+            <a href="https://nico-helpdesk.netlify.app" target="_blank" class="proj-link">
+              Live Demo <span class="proj-link-arrow">→</span>
+            </a>
           </div>
         </div>
       </div>
-      
-      <div class="project-card fade-in" style="animation-delay: 0.4s">
-        <div class="project-image">💻</div>
-        <div class="project-content">
-          <h3>IT Command Center</h3>
-          <p>Real-time operations dashboard featuring system monitoring, server status tracking, and security alerts. Built for operational excellence and proactive problem-solving.</p>
-          <div class="project-tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Real-time</span>
-            <span class="tag">Analytics</span>
-            <span class="tag">Monitoring</span>
-          </div>
-          <div class="project-links">
-            <a href="https://nicofoxheart.github.io/it-command-center/" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
-            <a href="https://github.com/NicoFoxheart" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
 
+<!-- MUSIC -->
 <section id="music">
   <div class="container">
-    <h2 class="section-title">Music</h2>
-    <p class="section-subtitle">The human behind the code</p>
-    
-    <div class="music-intro fade-in">
-      <p>
-        Technology is how I solve problems, but music is how I connect with souls. 
-        These ambient soundscapes are my way of creating peace in a chaotic world — 
-        one gentle note at a time. Close your eyes, breathe, and let the sound carry you somewhere safe.
-      </p>
-    </div>
-    
+    <div class="section-label">// music & photography</div>
+    <h2 class="section-title">The human<br><em>behind the code</em></h2>
+    <div class="divider"></div>
+
+    <p class="music-intro reveal">
+      Technology is how I solve problems, but music is how I connect with souls.
+      These ambient soundscapes are my way of creating peace in a chaotic world —
+      one gentle note at a time. Close your eyes, breathe, and let the sound carry you somewhere safe.
+    </p>
+
     <div class="music-grid">
-      <div class="audio-player fade-in">
+      <div class="audio-card reveal">
         <div class="track-art">🎵</div>
-        <div class="track-info">
-          <h4>Sleepy Rain</h4>
-          <p>For relaxation, study, and sleep</p>
-        </div>
+        <div class="track-title">Sleepy Rain</div>
+        <div class="track-sub">For relaxation, study, and sleep</div>
         <audio controls>
           <source src="sleepy-rain.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
+          Your browser does not support audio.
         </audio>
       </div>
-      
-      <div class="audio-player fade-in">
+
+      <div class="audio-card reveal">
         <div class="track-art">🌙</div>
-        <div class="track-info">
-          <h4>I Am With You Always</h4>
-          <p>Peaceful ambient soundscape</p>
-        </div>
+        <div class="track-title">I Am With You Always</div>
+        <div class="track-sub">Peaceful ambient soundscape</div>
         <audio controls>
           <source src="i-am-with-you-always.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
+          Your browser does not support audio.
         </audio>
       </div>
-      
-      <div class="audio-player fade-in">
+
+      <div class="audio-card reveal">
         <div class="track-art">💫</div>
-        <div class="track-info">
-          <h4>I'll Never Leave You</h4>
-          <p>A promise in sound — you're not alone</p>
-        </div>
+        <div class="track-title">I'll Never Leave You</div>
+        <div class="track-sub">A promise in sound — you're not alone</div>
         <audio controls>
           <source src="ill-never-leave-you.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
+          Your browser does not support audio.
         </audio>
       </div>
-      
-      <div class="photography-cta fade-in">
+
+      <div class="photo-card reveal">
         <h4>📸 Photography</h4>
         <p>
-          Beyond music and code, I capture moments of stillness through photography. 
-          Each shot is an invitation to pause and notice the peace that's always been there.
+          Beyond music and code, I capture moments of stillness — nature, light,
+          and quiet skies. Each shot is an invitation to pause and notice the peace
+          that's always been there.
         </p>
-        <a href="https://www.instagram.com/nicofoxheart" target="_blank" class="btn btn-secondary">
-          View My Photography on Instagram
+        <a href="https://www.instagram.com/nicofoxheart" target="_blank" class="btn btn-outline">
+          View on Instagram →
         </a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="section-label">// contact</div>
+      <h2 class="section-title">Let's build<br><em>something meaningful</em></h2>
+      <div class="divider" style="margin-left:auto;margin-right:auto;"></div>
+
+      <p class="contact-text reveal">
+        I'm open to entry-level cybersecurity and IT roles in the Tampa area, and always happy
+        to connect with people building technology that cares. Whether you want to collaborate,
+        hire, or just say hi — reach out.
+      </p>
+
+      <div class="social-grid reveal">
+        <a href="https://www.instagram.com/nicofoxheart" target="_blank" class="social-btn">📸 Instagram</a>
+        <a href="https://github.com/NicoFoxheart" target="_blank" class="social-btn">💻 GitHub</a>
+        <a href="https://www.linkedin.com/in/nicolas-graham-2b61b8264" target="_blank" class="social-btn">💼 LinkedIn</a>
+        <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank" class="social-btn">🎵 YouTube</a>
+      </div>
+
+      <div class="email-cta reveal">
+        <a href="mailto:ngraham91@outlook.com" class="btn btn-primary" style="font-size:16px;padding:16px 44px;">
+          Send an Email →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-icons">🇵🇦 🦊 🐂 🇺🇸</div>
-  <p style="font-size: 18px;">&copy; 2026 Nicolas Graham</p>
-  <p>Built with passion in Tampa, FL 🌴</p>
-  <p style="margin-top: 18px; font-size: 14px;">
-    <a href="https://www.instagram.com/nicofoxheart" target="_blank">Instagram</a> • 
-    <a href="https://github.com/NicoFoxheart" target="_blank">GitHub</a> • 
-    <a href="https://www.linkedin.com/in/nicolas-graham-2b61b8264" target="_blank">LinkedIn</a> • 
+  <p style="font-size:17px;color:var(--text-secondary);">© 2026 Nicolas Graham</p>
+  <p>Built with heart in Tampa, FL 🌴</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/nicofoxheart" target="_blank">Instagram</a>
+    <a href="https://github.com/NicoFoxheart" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/nicolas-graham-2b61b8264" target="_blank">LinkedIn</a>
     <a href="https://youtube.com/shorts/TL-5yDlcwNE?si=bKd-io_6ZXQBBvOE" target="_blank">YouTube</a>
-  </p>
-  <p style="margin-top: 25px; font-size: 14px; font-style: italic; color: var(--usf-gold);">
-    "Pa'lante siempre" — Always forward 💙<br>
-    Go Bulls! 🐂💚💛
-  </p>
+  </div>
+  <p class="footer-motto">"Pa'lante siempre" — Always forward 💙</p>
 </footer>
 
 <script>
-// ============================================
-// FLOATING MUSIC PLAYER CONTROLS
-// ============================================
+// ============================================================
+// MUSIC PLAYER
+// ============================================================
+const tracks = [
+  { src: 'sleepy-rain.mp3',        name: 'Sleepy Rain' },
+  { src: 'i-am-with-you-always.mp3', name: 'I Am With You Always' },
+  { src: 'ill-never-leave-you.mp3',  name: "I'll Never Leave You" }
+];
+let currentTrack = 0;
+let playing = false;
 
-const bgMusic = document.getElementById('bgMusic');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const volumeSlider = document.getElementById('volumeSlider');
-const minimizeBtn = document.getElementById('minimizeBtn');
-const musicPlayer = document.getElementById('musicPlayer');
-const playerContent = document.getElementById('playerContent');
-const playerTitleText = document.getElementById('playerTitleText');
+const audioEl     = document.getElementById('audioEl');
+const playBtn     = document.getElementById('playBtn');
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const volSlider   = document.getElementById('volSlider');
+const trackDisplay= document.getElementById('trackDisplay');
+const musicToggle = document.getElementById('musicToggle');
+const musicPanel  = document.getElementById('musicPanel');
 
-let isPlaying = false;
-let isMinimized = false;
+audioEl.volume = 0.45;
 
-// Set initial volume
-bgMusic.volume = volumeSlider.value / 100;
+function loadTrack(i) {
+  currentTrack = (i + tracks.length) % tracks.length;
+  audioEl.src = tracks[currentTrack].src;
+  trackDisplay.textContent = tracks[currentTrack].name;
+  if (playing) audioEl.play();
+}
 
-// Play/Pause toggle
-playPauseBtn.addEventListener('click', () => {
-  if (isPlaying) {
-    bgMusic.pause();
-    playPauseBtn.textContent = '▶';
-    playPauseBtn.title = 'Play';
+playBtn.addEventListener('click', () => {
+  if (playing) {
+    audioEl.pause();
+    playBtn.textContent = '▶';
   } else {
-    bgMusic.play();
-    playPauseBtn.textContent = '⏸';
-    playPauseBtn.title = 'Pause';
+    audioEl.play();
+    playBtn.textContent = '⏸';
   }
-  isPlaying = !isPlaying;
+  playing = !playing;
 });
 
-// Volume control
-volumeSlider.addEventListener('input', (e) => {
-  bgMusic.volume = e.target.value / 100;
+prevBtn.addEventListener('click', () => loadTrack(currentTrack - 1));
+nextBtn.addEventListener('click', () => loadTrack(currentTrack + 1));
+
+volSlider.addEventListener('input', e => {
+  audioEl.volume = e.target.value / 100;
 });
 
-// Minimize/Expand toggle
-minimizeBtn.addEventListener('click', () => {
-  if (isMinimized) {
-    playerContent.classList.remove('hidden');
-    musicPlayer.classList.remove('minimized');
-    minimizeBtn.textContent = '−';
-    minimizeBtn.title = 'Minimize';
-    playerTitleText.textContent = 'Ambient Music';
-  } else {
-    playerContent.classList.add('hidden');
-    musicPlayer.classList.add('minimized');
-    minimizeBtn.textContent = '+';
-    minimizeBtn.title = 'Expand';
-    playerTitleText.textContent = isPlaying ? '🎵' : '🎵';
-  }
-  isMinimized = !isMinimized;
+musicToggle.addEventListener('click', () => {
+  musicPanel.classList.toggle('open');
+  musicToggle.textContent = musicPanel.classList.contains('open') ? '✕' : '🎵';
 });
 
-// ============================================
-// NAVBAR & ANIMATIONS (existing code)
-// ============================================
-
-// Navbar scroll effect
+// ============================================================
+// NAVBAR SCROLL
+// ============================================================
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ============================================================
+// HAMBURGER MENU
+// ============================================================
+const hamburger   = document.getElementById('hamburger');
+const mobileMenu  = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
 });
 
-// Scroll animation observer
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-};
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
     }
   });
-}, observerOptions);
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
-// Observe all elements with fade-in class
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-document.querySelectorAll('.project-card').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Smooth scroll for navigation
+// ============================================================
+// SMOOTH SCROLL
+// ============================================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
+  anchor.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 </script>
-
 </body>
 </html>
